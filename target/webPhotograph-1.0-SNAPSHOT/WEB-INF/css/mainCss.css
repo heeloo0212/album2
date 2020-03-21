@@ -1,0 +1,17 @@
+html,
+body{
+    background-color: #eeeeee;
+}
+.imageSize{
+    height: 250px;
+    width: 220px;
+}
+.clear-panel{
+    height: 320px;
+    width: 250px;
+    border: 2px;
+}
+.firstModelBody{
+    height: 300px;
+    width: 400px;
+}
