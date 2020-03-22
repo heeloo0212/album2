@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.photo.dao.PhotoGraphDao">
+    <resultMap id="photoGraphResultMap" type="com.yang.photo.pojo.PhotoGraph">
+
+        <id column="id" property="id"/>
+        <result column="name" property="name"></result>
+        <result column="description" property="description"></result>
+        <result column="type" property="type"></result>
+        <result column="style" property="style"></result>
+        <result column="permission" property="permission"></result>
+        <result column="click" property="click"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="image" property="image"></result>
+    </resultMap>
+
+    <sql id="column_list">
+        id,name,description,type,style,permission,click,create_time,image
+    </sql>
+
+    <select id="getPhotoGraphList" resultMap="photoGraphResultMap">
+
+        select * from photograph
+
+    </select>
+
+    <insert id="addPhotoGraph" parameterType="com.yang.photo.pojo.PhotoGraph">
+
+        insert into photograph(<include refid="column_list"></include>)
+        values (#{id},#{name},#{description},#{type},#{style},#{permission},#{click},#{createTime},#{image})
+
+    </insert>
+
+    <delete id="deletePhotoGraphById" parameterType="com.yang.photo.pojo.PhotoGraph">
+
+        delete from photograph where id = #{id}
+
+    </delete>
+
+</mapper>

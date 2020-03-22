@@ -12,10 +12,27 @@
         <result property="email" column="email"></result>
     </resultMap>
 
+    <sql id="column_list">
+        id,name,password,age,sex,email
+    </sql>
 
     <select id="loginNameAndPassword" resultMap="userResultMap" parameterType="User">
 
         select * from user where name=#{name} and password=#{password}
 
     </select>
+
+    <insert id="addUser" parameterType="com.yang.photo.pojo.User">
+
+        insert into user(<include refid="column"/>)
+        values(#{id},#{name},#{password},#{age},#{sex},#{email})
+
+    </insert>
+
+    <update id="modifyUser" parameterType="com.yang.photo.pojo">
+
+        update 
+
+    </update>
+
 </mapper>
