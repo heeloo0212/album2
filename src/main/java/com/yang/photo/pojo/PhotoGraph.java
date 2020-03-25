@@ -17,6 +17,7 @@ public class PhotoGraph {
     private int click;
     private Date createTime;
     private String image;
+    private int userId;
 
     private List<Photo> photoList;
 
@@ -98,5 +99,13 @@ public class PhotoGraph {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
