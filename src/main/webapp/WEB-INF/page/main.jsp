@@ -103,7 +103,6 @@
                             <option>相册1</option>
                         </select>
                     </div>
-
                 </div>
             </div>
             <div class="modal-body ">
@@ -144,7 +143,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-
                         <label class="col-sm-2 control-label">分类:</label>
                         <div class="col-sm-3">
                             <select class="form-control" id="graphType" name="" onchange="">
@@ -157,7 +155,6 @@
                                 <option>其他</option>
                             </select>
                         </div>
-
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">权限:</label>

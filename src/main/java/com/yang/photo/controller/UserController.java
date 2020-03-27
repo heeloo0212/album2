@@ -35,4 +35,15 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/register")
+    public String toRegister(){
+        return "userRegister";
+    }
+
+    @RequestMapping("/addUser")
+    public String addUser(User user){
+        return null;
+    }
+
+
 }

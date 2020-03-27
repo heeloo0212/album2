@@ -24,7 +24,7 @@
 
     <insert id="addUser" parameterType="com.yang.photo.pojo.User">
 
-        insert into user(<include refid="column"/>)
+        insert into user(<include refid="column_list"/>)
         values(#{id},#{name},#{password},#{age},#{sex},#{email})
 
     </insert>
