@@ -1,8 +1,9 @@
 package com.yang.photo.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Photo {
+public class Photo implements Serializable {
     private int id;
     private String name;
     /**

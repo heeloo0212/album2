@@ -13,6 +13,7 @@
     <title>个人相册主页</title>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="${pageContext.request.contextPath}/layer/layer.js"></script>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/mainCss.css">
 </head>

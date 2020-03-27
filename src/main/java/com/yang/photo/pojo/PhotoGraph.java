@@ -1,9 +1,10 @@
 package com.yang.photo.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class PhotoGraph {
+public class PhotoGraph implements Serializable {
     private int id;
     private String name;
     private String description;
