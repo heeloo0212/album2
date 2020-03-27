@@ -21,9 +21,9 @@
         id,name,description,type,style,permission,click,create_time,image,user_id
     </sql>
 
-    <select id="getPhotoGraphList" resultMap="photoGraphResultMap">
+    <select id="getPhotoGraphList" resultMap="photoGraphResultMap" parameterType="int">
 
-        select * from photograph
+        select * from photograph where user_id = #{userId}
 
     </select>
 

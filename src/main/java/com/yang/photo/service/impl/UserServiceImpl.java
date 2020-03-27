@@ -20,4 +20,12 @@ public class UserServiceImpl implements UserService {
         }
         return user1;
     }
+
+    @Override
+    public int addUser(User user){
+        if(user != null){
+            return userDao.addUser(user);
+        }
+        return 0;
+    }
 }

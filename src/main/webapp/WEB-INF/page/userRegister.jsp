@@ -4,7 +4,7 @@
 <html lang="zh">
 <head>
 	<meta charset="UTF-8">
-	<title>登录页面</title>
+	<title>注册页面</title>
 	<link rel="stylesheet" href="../css/bootstrap.css">
 	<link href="../css/signin.css" rel="stylesheet">
 </head>
@@ -20,8 +20,8 @@
 		<label class="control-label">年龄:</label>
 		<input type="text" id="age" name="age" class="form-control" placeholder="请输入你的年龄"/><br>
 		<label class="control-label">性别:</label>
-		<input type="radio" name="sex" value="male"/><label>男</label>
-		<input type="radio" name="sex" value="male"/><label>女</label>
+		<input type="radio" name="sex" value="男"/><label>男</label>
+		<input type="radio" name="sex" value="女"/><label>女</label>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
 		<button class="btn btn-lg btn-info btn-block" type="button"><a href="${pageContext.request.contextPath}/loginPage">已有账号</a></button>
 	</form>
@@ -29,10 +29,5 @@
 </div> <!-- /container -->
 </body>
 
-<%--<script type="text/javascript">--%>
-	<%--function reflashImg() {--%>
-		<%--document.getElementById("c_img").src = "code.do?time="+ new Date().getTime();--%>
-	<%--}
-</script>--%>
 
 </html>

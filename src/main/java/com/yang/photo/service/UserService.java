@@ -5,4 +5,6 @@ import com.yang.photo.pojo.User;
 public interface UserService {
 
     User loginNameAndPassword(User user);
+
+    int addUser(User user);
 }

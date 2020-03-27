@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
@@ -121,6 +122,7 @@
 <!--创建模态框-->
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
+        <form class="form-horizontal" role="form" action="${pageContext.request.contextPath}/addPhotograph" method="post">
         <div class="modal-content">
             <div class="modal-header">
                 <label>创建相册</label>
@@ -129,23 +131,23 @@
                 </button>
             </div>
             <div class="modal-body ">
-                <form class="form-horizontal" role="form">
+
                     <div class="form-group">
                         <label for="graphName" class="col-sm-2 control-label">相册名:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="graphName" placeholder="请输入相册名">
+                            <input type="text" class="form-control" id="graphName" name="name" placeholder="请输入相册名">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="graphDesc" class="col-sm-2 control-label">相册描述:</label>
                         <div class="col-sm-6">
-                            <textarea class="form-control" id="graphDesc" cols="" rows="4" placeholder="请输入相册描述"></textarea>
+                            <textarea class="form-control" id="graphDesc" name="description" cols="" rows="4" placeholder="请输入相册描述"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">分类:</label>
                         <div class="col-sm-3">
-                            <select class="form-control" id="graphType" name="" onchange="">
+                            <select class="form-control" id="graphType" name="type" onchange="">
                                 <option>最爱</option>
                                 <option>风景</option>
                                 <option>个人照</option>
@@ -159,24 +161,24 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">权限:</label>
                         <div class="col-sm-4">
-                        <select class="form-control" id="permission" name="" onchange="">
+                        <select class="form-control" id="permission" name="permission" onchange="">
                             <option>所有人可见</option>
                             <option>仅自己能见</option>
                             <option>仅好友能见</option>
                         </select>
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success">
                     取消
                 </button>
-                <button type="button" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary">
                     创建相册
                 </button>
             </div>
         </div><!-- /.modal-content -->
+        </form>
     </div><!-- /.modal -->
 </div>
 

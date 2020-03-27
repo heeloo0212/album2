@@ -42,7 +42,12 @@ public class UserController {
 
     @RequestMapping("/addUser")
     public String addUser(User user){
-        return null;
+        System.out.println(user.getSex() + "  " +user.getEmail());
+        if(user != null){
+            userService.addUser(user);
+            return "login";
+        }
+        return "error";
     }
 
 
