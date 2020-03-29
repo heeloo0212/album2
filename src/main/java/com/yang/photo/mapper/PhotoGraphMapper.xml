@@ -15,10 +15,11 @@
         <result column="create_time" property="createTime"></result>
         <result column="image" property="image"></result>
         <result column="user_id" property="userId"></result>
+        <result column="update_time" property="updateTime"></result>
     </resultMap>
 
     <sql id="column_list">
-        id,name,description,type,style,permission,click,create_time,image,user_id
+        id,name,description,type,style,permission,click,create_time,image,user_id,update_time
     </sql>
 
     <select id="getPhotoGraphList" resultMap="photoGraphResultMap" parameterType="int">
@@ -30,7 +31,7 @@
     <insert id="addPhotoGraph" parameterType="com.yang.photo.pojo.PhotoGraph">
 
         insert into photograph(<include refid="column_list"></include>)
-        values (#{id},#{name},#{description},#{type},#{style},#{permission},#{click},#{createTime},#{image},#{userId})
+        values (#{id},#{name},#{description},#{type},#{style},#{permission},#{click},#{createTime},#{image},#{userId},#{updateTime})
 
     </insert>
 

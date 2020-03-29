@@ -10,7 +10,7 @@ public interface PhotoDao {
 
     List<Photo> getPhotoListByGid(Photo photo);
 
-    int addPhoto(Photo photo);
+    int batchAddPhoto(List<Photo> photo);
 
     int deletePhotoById(Photo photo);
 

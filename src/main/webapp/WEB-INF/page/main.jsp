@@ -16,9 +16,9 @@
     <script src="${pageContext.request.contextPath}/layer/layer.js"></script>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/mainCss.css">
+    <link href="../css/signin.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
 <div class="row" style="height: 80px; background-color: #c1e2b3">
     <div class="col-mid-12" style="text-align: center"><h1>个人相册</h1></div>
 </div>
@@ -86,7 +86,8 @@
 
 <!-- 上传模态框（Modal） -->
 <div class="modal fade" id="upModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md">
+    <div class="modal-dialog modal-lg">
+        <form class="form-horizontal" role="form" action="${pageContext.request.contextPath}/addPhoto" enctype="multipart/form-data" method="post">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -108,16 +109,29 @@
                 </div>
             </div>
             <div class="modal-body ">
-                <div class="" align="center">
-                <button type="button" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-picture"></i>上传相册/视频</button>
+                <div id="Pic_pass">
+                    <p style="font-size: 20px;font-weight: bold;">请上传照片 </p>
+                    <p><span style="color: red">注：每张照片大写不可超过4M，且最多可以传十张</span></p>
+                    <div class="picDiv">
+                        <div class="addImages">
+                            <input type="file" class="file" id="fileInput" name="file" multiple="multiple" accept="image/png, image/jpeg, image/gif, image/jpg">
+                            <div class="text-detail">
+                                <span>+</span>
+                                <p>点击上传</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="msg" style="display: none;"></div>
             </div>
+
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary">
                     上传照片/视频
                 </button>
             </div>
         </div><!-- /.modal-content -->
+        </form>
     </div><!-- /.modal -->
 </div>
 <!--创建模态框-->
@@ -183,5 +197,54 @@
     </div><!-- /.modal -->
 </div>
 
+<script>
+    //图片上传预览功能
+    var userAgent = navigator.userAgent; //用于判断浏览器类型
+
+    $(".file").change(function() {
+        //获取选择图片的对象
+        var docObj = $(this)[0];
+        var picDiv = $(this).parents(".picDiv");
+        //得到所有的图片文件
+        var fileList = docObj.files;
+        //循环遍历
+        for (var i = 0; i < fileList.length; i++) {
+            //动态添加html元素
+            var picHtml = "<div class='imageDiv' > <img id='img" + fileList[i].name + "' /> <div class='cover'><i class='delbtn'>删除</i></div></div>";
+            console.log(picHtml);
+            picDiv.prepend(picHtml);
+            //获取图片imgi的对象
+            var imgObjPreview = document.getElementById("img" + fileList[i].name);
+            if (fileList && fileList[i]) {
+                //图片属性
+                imgObjPreview.style.display = 'block';
+                imgObjPreview.style.width = '160px';
+                imgObjPreview.style.height = '130px';
+                //imgObjPreview.src = docObj.files[0].getAsDataURL();
+                //火狐7以上版本不能用上面的getAsDataURL()方式获取，需要以下方式
+                if (userAgent.indexOf('MSIE') == -1) {
+                    //IE以外浏览器
+                    imgObjPreview.src = window.URL.createObjectURL(docObj.files[i]); //获取上传图片文件的物理路径;
+                    console.log(imgObjPreview.src);
+                    // var msgHtml = '<input type="file" id="fileInput" multiple/>';
+                } else {
+                    //IE浏览器
+                    if (docObj.value.indexOf(",") != -1) {
+                        var srcArr = docObj.value.split(",");
+                        imgObjPreview.src = srcArr[i];
+                    } else {
+                        imgObjPreview.src = docObj.value;
+                    }
+                }
+            }
+        }
+
+        /*删除功能*/
+        $(".delbtn").click(function() {
+            var _this = $(this);
+            _this.parents(".imageDiv").remove();
+        });
+    });
+</script>
 </body>
 </html>

@@ -3,39 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yang.photo.dao.PhotoDao">
-    <resultMap id="photoResultMap" type="com.yang.photo.pojo.Photo">
+    <resultMap id="PhotoResultMap" type="com.yang.photo.pojo.Photo">
         <id column="id" property="id"></id>
-        <result column="name" property="name"></result>
-        <result column="gid" property="gid"></result>
-        <result column="click" property="click"></result>
-        <result column="info" property="info"></result>
-        <result column="build_time" property="buildTime"></result>
-        <result column="comment" property="comment"></result>
         <result column="image" property="image"></result>
+        <result column="gid" property="gid"></result>
         <result column="style" property="style"></result>
+        <result column="create_time" property="createTime"></result>
     </resultMap>
-
     <sql id="column_list">
-        id,name,gid,click,info,build_time,comment,image,style
+        image,gid,style,create_time
     </sql>
 
-    <select id="getPhotoListByGid" resultMap="photoResultMap" parameterType="com.yang.photo.pojo.PhotoGraph">
+    <insert id="batchAddPhoto" parameterType="java.util.List">
 
-        select * from photo where gid = #{gid}
-
-    </select>
-
-    <insert id="addPhoto" parameterType="com.yang.photo.pojo.Photo">
-
-        insert into photo(<include refid="column_list"/>)
-        values (#{id},#{name},#{gid},#{click},#{info},#{buildTime},#{comment},#{image},#{style})
-
+        insert into photo(<include refid="column_list"/>) values
+        <trim suffixOverrides=",">
+        <foreach collection="list" item="item" index="index">
+            (#{item.image},#{item.gid},#{item.style},#{item.createTime}),
+        </foreach>
+        </trim>
     </insert>
-
-    <delete id="deletePhotoById" parameterType="com.yang.photo.pojo.Photo">
-
-        delete from photo where id = #{id}
-
-    </delete>
 
 </mapper>

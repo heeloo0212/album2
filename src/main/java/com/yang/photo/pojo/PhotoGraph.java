@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class PhotoGraph implements Serializable {
+public class PhotoGraph extends UploadFile implements Serializable {
     private int id;
     private String name;
     private String description;
@@ -19,6 +19,7 @@ public class PhotoGraph implements Serializable {
     private Date createTime;
     private String image;
     private int userId;
+    private Date updateTime;
 
     private List<Photo> photoList;
 
@@ -108,5 +109,13 @@ public class PhotoGraph implements Serializable {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
