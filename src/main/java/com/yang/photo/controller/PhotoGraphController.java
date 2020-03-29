@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Date;
+
 /**
  * &lt;一句话功能简述&gt;
  * &lt;功能详细描述&gt;
@@ -23,6 +25,7 @@ public class PhotoGraphController {
     @RequestMapping("/addPhotograph")
     public String addPhotoGraph(PhotoGraph photoGraph){
         if (photoGraph != null){
+            photoGraph.setCreateTime(new Date());
             int result = photoGraphService.addPhotoGraph(photoGraph);
         }
         return "main";

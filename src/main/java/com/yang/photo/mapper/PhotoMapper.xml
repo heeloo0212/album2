@@ -14,6 +14,12 @@
         image,gid,style,create_time
     </sql>
 
+    <select id="getPhotoByGid" parameterType="com.yang.photo.pojo.Photo">
+
+        select * from photo where gid = #{gid}
+
+    </select>
+
     <insert id="batchAddPhoto" parameterType="java.util.List">
 
         insert into photo(<include refid="column_list"/>) values
