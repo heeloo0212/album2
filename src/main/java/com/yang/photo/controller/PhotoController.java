@@ -8,6 +8,7 @@ import com.yang.photo.service.PhotoService;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,18 @@ public class PhotoController {
 
     @Autowired
     private PhotoGraphService photoGraphService;
+
+    @RequestMapping("/getPhotos")
+    public String getPhotos(Integer gid, Model model){
+        System.out.println(gid);
+        if(gid != 0) {
+            Photo photo = new Photo();
+            photo.setGid(gid);
+            List<Photo> photoList = photoService.getPhotoListByGid(photo);
+            model.addAttribute("photoList",photoList);
+        }
+        return "photos";
+    }
 
     @RequestMapping(value = "/addPhoto",method = RequestMethod.POST)
     public String addPhoto(Photo photo,HttpSession session,@RequestParam(value="file",required=false) MultipartFile[] file) throws Exception{

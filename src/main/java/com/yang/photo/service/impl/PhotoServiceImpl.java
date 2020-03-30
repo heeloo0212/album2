@@ -17,7 +17,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public List<Photo> getPhotoListByGid(Photo photo) {
-        return null;
+        return photoDao.getPhotoListByGid(photo);
     }
 
     @Override

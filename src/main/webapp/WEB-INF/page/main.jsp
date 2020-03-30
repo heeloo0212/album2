@@ -49,11 +49,13 @@
         <div class="col-md-3">
             <div class="panel clear-panel">
                 <div class="panel-body">
-                    <img src="${pageContext.request.contextPath}/${photoGraph.image}" class="imageSize">
+                    <a href="${pageContext.request.contextPath}/getPhotos?gid=${photoGraph.id}">
+                    <img src="${pageContext.request.contextPath}/${photoGraph.image}" class="imageSize"></a>
                     <br><br>
-                    <div>${photoGraph.name}</div>
+                    <label>${photoGraph.name}</label>
                 </div>
             </div>
+
         </div>
         </c:forEach>
     </div>

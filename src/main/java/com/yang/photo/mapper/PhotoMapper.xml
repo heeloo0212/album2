@@ -14,7 +14,7 @@
         image,gid,style,create_time
     </sql>
 
-    <select id="getPhotoByGid" resultMap="PhotoResultMap" parameterType="com.yang.photo.pojo.Photo">
+    <select id="getPhotoListByGid" resultMap="PhotoResultMap" parameterType="com.yang.photo.pojo.Photo">
 
         select * from photo where gid = #{gid}
 
