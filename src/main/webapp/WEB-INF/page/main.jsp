@@ -51,7 +51,7 @@
                 <div class="panel-body">
                     <img src="${pageContext.request.contextPath}/${photoGraph.image}" class="imageSize">
                     <br><br>
-                    <div>${photoGraph.description}</div>
+                    <div>${photoGraph.name}</div>
                 </div>
             </div>
         </div>
@@ -69,11 +69,11 @@
                     &times;
                 </button>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">分类:</label>
+                    <label class="col-sm-2 control-label">上传到相册:</label>
                     <div class="col-sm-6">
-                        <select class="form-control input-md" id="graphId" name="photoGraph.id" onchange="">
+                        <select class="form-control input-md" id="graphId" name="gid" onchange="">
                             <c:forEach items="${photoGraphList}" var="photoGraph">
-                                <option value="${photoGraph.id}" name="photoGraphId">${photoGraph.name}</option>
+                                <option value="${photoGraph.id}" name="gid">${photoGraph.name}</option>
                             </c:forEach>
                         </select>
                     </div>

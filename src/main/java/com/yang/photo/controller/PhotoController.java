@@ -30,11 +30,12 @@ public class PhotoController {
     private PhotoGraphService photoGraphService;
 
     @RequestMapping(value = "/addPhoto",method = RequestMethod.POST)
-    public String addPhoto(HttpSession session,@RequestParam(value="file",required=false) MultipartFile[] file) throws Exception{
+    public String addPhoto(Photo photo,HttpSession session,@RequestParam(value="file",required=false) MultipartFile[] file) throws Exception{
         List<Photo> photos = new ArrayList<>();
         Photo photo1 =null;
         User user = (User)session.getAttribute("loginUser");
-        int gid=1;
+        System.out.println(photo.getGid());
+        int gid=photo.getGid();
         for (MultipartFile mf : file) {
             photo1=new Photo();
             if (!mf.isEmpty()) {

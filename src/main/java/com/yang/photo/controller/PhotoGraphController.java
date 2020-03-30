@@ -27,24 +27,21 @@ public class PhotoGraphController {
     private PhotoGraphService photoGraphService;
 
     @RequestMapping("/addPhotograph")
-    public String addPhotoGraph(PhotoGraph photoGraph){
+    public String addPhotoGraph(PhotoGraph photoGraph,HttpSession session){
+        User user = (User)session.getAttribute("loginUser");
         if (photoGraph != null){
+            photoGraph.setUserId(user.getId());
             photoGraph.setCreateTime(new Date());
             int result = photoGraphService.addPhotoGraph(photoGraph);
         }
-        return "main";
+        return "forward:toMain";
     }
 
     @RequestMapping("/toMain")
     public String toMain(Model model, HttpSession session){
         User user = (User)session.getAttribute("loginUser");
-        System.out.println(user);
         if(user != null) {
             List<PhotoGraph> photoGraphList = photoGraphService.getPhotoGraphByUserId(user.getId());
-            System.out.println(photoGraphList);
-            for (PhotoGraph p : photoGraphList) {
-                System.out.println("photoGraph:" + p);
-            }
             model.addAttribute("photoGraphList", photoGraphList);
             String userName = user.getName();
             model.addAttribute("userName", userName);

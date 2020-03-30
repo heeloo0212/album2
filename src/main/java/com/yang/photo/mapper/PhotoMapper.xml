@@ -32,7 +32,7 @@
 
     <select id="getFirstImage" resultType="com.yang.photo.pojo.Photo" parameterType="com.yang.photo.pojo.PhotoGraph">
 
-        SELECT p1.image FROM photo p1 LEFT JOIN photograph p2 ON user_id = #{userId} AND gid = #{id}
+        SELECT p1.image FROM photo p1 LEFT JOIN photograph p2 ON p1.gid = p2.id where user_id = #{userId} AND gid = #{id}
         ORDER BY p1.create_time ASC
         LIMIT 0,1
 
