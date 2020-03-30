@@ -2,6 +2,7 @@ package com.yang.photo.service.impl;
 
 import com.yang.photo.dao.PhotoDao;
 import com.yang.photo.pojo.Photo;
+import com.yang.photo.pojo.PhotoGraph;
 import com.yang.photo.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,4 +29,9 @@ public class PhotoServiceImpl implements PhotoService {
     public int deletePhotoById(Photo photo) {
         return 0;
     }
+
+    @Override public Photo getFirstImage(PhotoGraph photoGraph) {
+        return photoDao.getFirstImage(photoGraph);
+    }
+
 }

@@ -8,5 +8,11 @@ public interface PhotoGraphService {
 
     List<PhotoGraph> getPhotoGraphByUserId(int id);
     int addPhotoGraph(PhotoGraph photoGraph);
+    /**
+     * 根据ID查询相册
+     * */
+    PhotoGraph getPhotoGraphById(int id);
+
+    int updatePhotoGraph(PhotoGraph photoGraph);
 
 }

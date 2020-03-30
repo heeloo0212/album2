@@ -14,7 +14,7 @@
         image,gid,style,create_time
     </sql>
 
-    <select id="getPhotoByGid" parameterType="com.yang.photo.pojo.Photo">
+    <select id="getPhotoByGid" resultMap="PhotoResultMap" parameterType="com.yang.photo.pojo.Photo">
 
         select * from photo where gid = #{gid}
 
@@ -29,5 +29,13 @@
         </foreach>
         </trim>
     </insert>
+
+    <select id="getFirstImage" resultType="com.yang.photo.pojo.Photo" parameterType="com.yang.photo.pojo.PhotoGraph">
+
+        SELECT p1.image FROM photo p1 LEFT JOIN photograph p2 ON user_id = #{userId} AND gid = #{id}
+        ORDER BY p1.create_time ASC
+        LIMIT 0,1
+
+    </select>
 
 </mapper>

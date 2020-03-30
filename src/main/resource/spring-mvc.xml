@@ -23,7 +23,7 @@
     <mvc:resources mapping="/fonts/**" location="/WEB-INF/fonts/"/>
     <!--<mvc:resources mapping="/iconfont/**" location="/WEB-INF/iconfont/"/>-->
     <mvc:resources mapping="/layer/**" location="/WEB-INF/layer/"/>
-    <mvc:resources mapping="/upload/*" location="/WEB-INF/upload/" />
+    <mvc:resources mapping="/upload/**" location="/WEB-INF/upload/" />
 
     <!--配置视图解释器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

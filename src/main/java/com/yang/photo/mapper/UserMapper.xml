@@ -18,7 +18,7 @@
 
     <select id="loginNameAndPassword" resultMap="userResultMap" parameterType="User">
 
-        select * from user where name=#{name} and password=#{password}
+        select * from user where name = #{name} and password = #{password}
 
     </select>
 

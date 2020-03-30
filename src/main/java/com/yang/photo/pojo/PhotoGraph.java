@@ -118,4 +118,11 @@ public class PhotoGraph extends UploadFile implements Serializable {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override public String toString() {
+        return "PhotoGraph{" + "id=" + id + ", name='" + name + '\'' + ", description='" + description + '\''
+            + ", type='" + type + '\'' + ", style='" + style + '\'' + ", permission='" + permission + '\'' + ", click="
+            + click + ", createTime=" + createTime + ", image='" + image + '\'' + ", userId=" + userId + ", updateTime="
+            + updateTime + ", photoList=" + photoList + '}';
+    }
 }

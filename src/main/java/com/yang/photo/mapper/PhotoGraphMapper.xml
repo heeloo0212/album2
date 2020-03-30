@@ -22,7 +22,11 @@
         id,name,description,type,style,permission,click,create_time,image,user_id,update_time
     </sql>
 
-    <select id="getPhotoGraphList" resultMap="photoGraphResultMap" parameterType="int">
+    <select id="getPhotoGraphById" resultMap="photoGraphResultMap" parameterType="int">
+        select <include refid="column_list"/> from photograph where id = #{id}
+    </select>
+
+    <select id="getPhotoGraphByUserId" resultMap="photoGraphResultMap" parameterType="int">
 
         select * from photograph where user_id = #{userId}
 
@@ -40,5 +44,22 @@
         delete from photograph where id = #{id}
 
     </delete>
+
+    <update id="updatePhotoGraph" parameterType="com.yang.photo.pojo.PhotoGraph">
+
+        update photograph
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="description != null and description != ''">description = #{description},</if>
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="style != null and style != ''">style = #{style},</if>
+            <if test="permission != null and permission != ''">permission = #{permission},</if>
+            <if test="click != null and click != ''">click = #{click},</if>
+            <if test="image != null and image != ''">image = #{image},</if>
+            <if test="updateTime != null and updateTime != ''">update_time = #{updateTime}</if>
+        </set>
+        where id = #{id}
+
+    </update>
 
 </mapper>

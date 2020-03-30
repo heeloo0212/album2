@@ -45,42 +45,17 @@
     <button type="button" class="btn">展示设置</button>
     <br><br>
     <div style="position: relative" class="row">
+        <c:forEach items="${photoGraphList}" var="photoGraph">
         <div class="col-md-3">
             <div class="panel clear-panel">
                 <div class="panel-body">
-                    <img src="../images/女包.webp.jpg" class="imageSize">
+                    <img src="${pageContext.request.contextPath}/${photoGraph.image}" class="imageSize">
                     <br><br>
-                    <div>好看的相册</div>
+                    <div>${photoGraph.description}</div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="panel clear-panel">
-                <div class="panel-body">
-                    <img src="../images/男卫衣.jpg" class="imageSize">
-                    <br><br>
-                    <div>好看的相册</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="panel clear-panel">
-                <div class="panel-body">
-                    <img src="../images/羊毛衫.jpg" class="imageSize">
-                    <br><br>
-                    <div>好看的相册</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="panel clear-panel">
-                <div class="panel-body">
-                    <img src="../images/美女的羊毛衫.jpg" class="imageSize">
-                    <br><br>
-                    <div>好看的相册</div>
-                </div>
-            </div>
-        </div>
+        </c:forEach>
     </div>
 </div>
 
@@ -96,14 +71,10 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">分类:</label>
                     <div class="col-sm-6">
-                        <select class="form-control" id="graph" name="" onchange="">
-                            <option>相册1</option>
-                            <option>相册1</option>
-                            <option>相册1</option>
-                            <option>相册1</option>
-                            <option>相册1</option>
-                            <option>相册1</option>
-                            <option>相册1</option>
+                        <select class="form-control input-md" id="graphId" name="photoGraph.id" onchange="">
+                            <c:forEach items="${photoGraphList}" var="photoGraph">
+                                <option value="${photoGraph.id}" name="photoGraphId">${photoGraph.name}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </div>

@@ -52,4 +52,9 @@ public class Photo implements Serializable {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    @Override public String toString() {
+        return "Photo{" + "id=" + id + ", image='" + image + '\'' + ", gid=" + gid + ", style='" + style + '\''
+            + ", createTime=" + createTime + '}';
+    }
 }

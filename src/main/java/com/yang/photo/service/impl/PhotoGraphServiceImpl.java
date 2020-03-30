@@ -23,7 +23,8 @@ public class PhotoGraphServiceImpl implements PhotoGraphService {
     private PhotoGraphDao photoGraphDao;
 
     @Override public List<PhotoGraph> getPhotoGraphByUserId(int id) {
-        return null;
+        List<PhotoGraph> photoGraphList = photoGraphDao.getPhotoGraphByUserId(id);
+        return photoGraphList;
     }
 
     @Override public int addPhotoGraph(PhotoGraph photoGraph) {
@@ -32,4 +33,14 @@ public class PhotoGraphServiceImpl implements PhotoGraphService {
         }
         return 0;
     }
+
+    @Override public PhotoGraph getPhotoGraphById(int id) {
+        return photoGraphDao.getPhotoGraphById(id);
+    }
+
+    @Override public int updatePhotoGraph(PhotoGraph photoGraph) {
+        return photoGraphDao.updatePhotoGraph(photoGraph);
+    }
+
+
 }
