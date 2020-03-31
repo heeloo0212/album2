@@ -99,11 +99,13 @@
 
     //修改相册
     function modifyPhotoGraph() {
+        var id=$('#modifyPhotoGraphId').val();
         var name=$('#modifyGraphName').val();
         var description=$('#modifyGraphDesc').val();
         var type=$('#modifyGraphType').val();
         var permission=$('#modifyPermission').val();
         var photoGraph=new Object();
+        photoGraph.id=id;
         photoGraph.name=name;
         photoGraph.description=description;
         photoGraph.type=type;
