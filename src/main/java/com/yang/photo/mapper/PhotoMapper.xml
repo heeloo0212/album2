@@ -38,4 +38,14 @@
 
     </select>
 
+    <delete id="deletePhoto" parameterType="com.yang.photo.pojo.Photo">
+
+        delete from photo
+        <where>
+            <if test="id != null and id != ''">id = #{id}</if>
+            <if test="gid != null and gid != ''">and gid = #{gid}</if>
+        </where>
+
+    </delete>
+
 </mapper>

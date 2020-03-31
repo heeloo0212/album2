@@ -23,4 +23,5 @@ public interface PhotoGraphDao {
     int deletePhotoGraphById(PhotoGraph photoGraph);
 
     int updatePhotoGraph(PhotoGraph photoGraph);
+
 }

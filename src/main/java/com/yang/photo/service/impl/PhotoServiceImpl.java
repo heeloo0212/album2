@@ -25,9 +25,8 @@ public class PhotoServiceImpl implements PhotoService {
         return photoDao.batchAddPhoto(photos);
     }
 
-    @Override
-    public int deletePhotoById(Photo photo) {
-        return 0;
+    @Override public int deletePhoto(Photo photo) {
+        return photoDao.deletePhoto(photo);
     }
 
     @Override public Photo getFirstImage(PhotoGraph photoGraph) {

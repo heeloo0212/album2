@@ -42,5 +42,8 @@ public class PhotoGraphServiceImpl implements PhotoGraphService {
         return photoGraphDao.updatePhotoGraph(photoGraph);
     }
 
+    @Override public int deletePhotoGraphById(PhotoGraph photoGraph) {
+        return photoGraphDao.deletePhotoGraphById(photoGraph);
+    }
 
 }

@@ -2,6 +2,7 @@ package com.yang.photo.controller;
 
 import com.yang.photo.pojo.Photo;
 import com.yang.photo.pojo.PhotoGraph;
+import com.yang.photo.pojo.ResponseResult;
 import com.yang.photo.pojo.User;
 import com.yang.photo.service.PhotoGraphService;
 import com.yang.photo.service.PhotoService;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -32,12 +34,12 @@ public class PhotoController {
 
     @RequestMapping("/getPhotos")
     public String getPhotos(Integer gid, Model model){
-        System.out.println(gid);
         if(gid != 0) {
             Photo photo = new Photo();
             photo.setGid(gid);
             List<Photo> photoList = photoService.getPhotoListByGid(photo);
             model.addAttribute("photoList",photoList);
+            model.addAttribute("gid",gid);
         }
         return "photos";
     }
@@ -47,7 +49,6 @@ public class PhotoController {
         List<Photo> photos = new ArrayList<>();
         Photo photo1 =null;
         User user = (User)session.getAttribute("loginUser");
-        System.out.println(photo.getGid());
         int gid=photo.getGid();
         for (MultipartFile mf : file) {
             photo1=new Photo();
@@ -79,6 +80,26 @@ public class PhotoController {
         photoGraph1.setImage(photoService.getFirstImage(photoGraph).getImage());
         photoGraphService.updatePhotoGraph(photoGraph1);
         return "forward:toMain";
+    }
+
+    @RequestMapping("/deletePhoto")
+    @ResponseBody
+    public ResponseResult deletePhoto(int id){
+        ResponseResult responseResult = new ResponseResult();
+        int result = 0;
+        if(id != 0){
+            Photo photo = new Photo();
+            photo.setId(id);
+            result = photoService.deletePhoto(photo);
+        }
+        if(result > 0){
+            responseResult.setStatus(1);
+            responseResult.setMessage("删除成功");
+        }else{
+            responseResult.setStatus(0);
+            responseResult.setMessage("删除失败");
+        }
+        return responseResult;
     }
 
 }

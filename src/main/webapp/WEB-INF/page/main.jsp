@@ -18,6 +18,121 @@
     <link rel="stylesheet" href="../css/mainCss.css">
     <link href="../css/signin.css" rel="stylesheet" type="text/css">
 </head>
+<script>
+    function addPhotograph()
+    {
+        var name=$('#graphName').val();
+        var description=$('#graphDesc').val();
+        var type=$('#graphType').val();
+        var permission=$('#permission').val();
+        var photoGraph=new Object();
+        photoGraph.name=name;
+        photoGraph.description=description;
+        photoGraph.type=type;
+        photoGraph.permission=permission;
+            //异步请求
+        $.ajax({
+            type:'post',
+            url:'${pageContext.request.contextPath}/addPhotograph',
+            data:photoGraph,
+            dataType:'json',
+            success:function(result){
+                if(result.status==1){
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'successMsg'
+                    },function(){
+                        //重新加载数据
+                        location.href='${pageContext.request.contextPath}/toMain';
+                    })
+                }else{
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'errorsMsg'
+                    })
+                }
+            }
+        });
+    }
+
+    //显示确认删除的提示
+    function showDeleteModal(id){
+        //将id值赋值给div的隐藏域组件
+        $('#deletePhotoGraphId').val(id);
+        $('#deletePhotoGraphModal').modal('show');
+    }
+
+    function deletePhotoGraph() {
+        $.ajax({
+            url:'${pageContext.request.contextPath}/deletePhotoGraph',
+            type:'post',
+            dateType:'json',
+            data:{'id':$('#deletePhotoGraphId').val()},
+            success:function(result){
+                if(result.status==1){
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'successMsg'
+                    },function(){
+                        //重新加载数据
+                        location.href='${pageContext.request.contextPath}/toMain';
+                    })
+                }else{
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'errorsMsg'
+                    })
+                }
+            }
+        })
+
+    }
+
+    function showModifyModal(id,name,description,permission,type) {
+        $('#modifyPhotoGraphId').val(id);
+        $('#modifyGraphName').val(name);
+        $('#modifyGraphDesc').val(description);
+        $('#modifyGraphType').val(type);
+        $('#modifyPermission').val(permission);
+        $('#modifyPhotoGraphModal').modal('show');
+    }
+
+    //修改相册
+    function modifyPhotoGraph() {
+        var name=$('#modifyGraphName').val();
+        var description=$('#modifyGraphDesc').val();
+        var type=$('#modifyGraphType').val();
+        var permission=$('#modifyPermission').val();
+        var photoGraph=new Object();
+        photoGraph.name=name;
+        photoGraph.description=description;
+        photoGraph.type=type;
+        photoGraph.permission=permission;
+        $.ajax({
+            type:'post',
+            url:'${pageContext.request.contextPath}/modifyPhotoGraph',
+            data:photoGraph,
+            dataType:'json',
+            success:function(result){
+                if(result.status==1){
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'successMsg'
+                    },function(){
+                        //重新加载数据
+                        location.href='${pageContext.request.contextPath}/toMain';
+                    })
+                }else{
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'errorsMsg'
+                    })
+                }
+            }
+        })
+    }
+
+</script>
 <body>
 <div class="row" style="height: 80px; background-color: #c1e2b3">
     <div class="col-mid-12" style="text-align: center"><h1>个人相册</h1></div>
@@ -34,7 +149,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-th-large"></i> 应用</a></li>
-            <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-trash"></i> 回收站</a></li>
+            <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-user"></i> 好友列表</a></li>
             <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-edit"></i> 个人资料</a></li>
         </ul>
     </div>
@@ -53,6 +168,10 @@
                     <img src="${pageContext.request.contextPath}/${photoGraph.image}" class="imageSize"></a>
                     <br><br>
                     <label>${photoGraph.name}</label>
+                </div>
+                <div class="panel-footer right">
+                    <button onclick="showDeleteModal(${photoGraph.id})" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
+                    <button onclick="showModifyModal(${photoGraph.id},'${photoGraph.name}','${photoGraph.description}','${photoGraph.type}','${photoGraph.permission}')" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
                 </div>
             </div>
 
@@ -99,7 +218,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" >
                     上传照片/视频
                 </button>
             </div>
@@ -110,8 +229,7 @@
 <!--创建模态框-->
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
-        <form class="form-horizontal" role="form" action="${pageContext.request.contextPath}/addPhotograph" method="post">
-        <div class="modal-content">
+        <div class="modal-content form-horizontal">
             <div class="modal-header">
                 <label>创建相册</label>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -119,7 +237,6 @@
                 </button>
             </div>
             <div class="modal-body ">
-
                     <div class="form-group">
                         <label for="graphName" class="col-sm-2 control-label">相册名:</label>
                         <div class="col-sm-6">
@@ -150,25 +267,109 @@
                         <label class="col-sm-2 control-label">权限:</label>
                         <div class="col-sm-4">
                         <select class="form-control" id="permission" name="permission" onchange="">
-                            <option>所有人可见</option>
-                            <option>仅自己能见</option>
-                            <option>仅好友能见</option>
+                            <option value="everybody">所有人可见</option>
+                            <option value="oneself">仅自己能见</option>
+                            <option value="friend">仅好友能见</option>
                         </select>
                         </div>
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success">
+                <button type="button" class="btn btn-primary cancel" data-dismiss="modal">
                     取消
                 </button>
-                <button type="submit" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" onclick="addPhotograph()" data-dismiss="modal">
                     创建相册
                 </button>
             </div>
         </div><!-- /.modal-content -->
-        </form>
     </div><!-- /.modal -->
 </div>
+
+<!--修改模态框-->
+<div class="modal fade" id="modifyPhotoGraphModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content form-horizontal">
+            <div class="modal-header">
+                <label>修改相册</label>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div class="form-group">
+                    <label for="modifyGraphName" class="col-sm-2 control-label">相册名:</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="modifyGraphName" name="name" placeholder="请输入相册名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="modifyGraphDesc" class="col-sm-2 control-label">相册描述:</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" id="modifyGraphDesc" name="description" cols="" rows="4" placeholder="请输入相册描述"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">分类:</label>
+                    <div class="col-sm-3">
+                        <select class="form-control" id="modifyGraphType" name="type" onchange="">
+                            <option value="love">最爱</option>
+                            <option value="scenery">风景</option>
+                            <option value="personPhoto">个人照</option>
+                            <option value="active">活动</option>
+                            <option value="family">家人</option>
+                            <option value="animal">动物</option>
+                            <option value="other">其他</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">权限:</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="modifyPermission" name="permission" onchange="">
+                            <option>所有人可见</option>
+                            <option>仅自己能见</option>
+                            <option>仅好友能见</option>
+                        </select>
+                    </div>
+                </div>
+                <input type="hidden" id="modifyPhotoGraphId">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary cancel" data-dismiss="modal">
+                    取消
+                </button>
+                <button type="button" class="btn btn-primary" onclick="modifyPhotoGraph()" data-dismiss="modal">
+                    修改相册
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 确认删除 start -->
+<div class="modal fade" tabindex="-1" id="deletePhotoGraphModal">
+    <!-- 窗口声明 -->
+    <div class="modal-dialog">
+        <!-- 内容声明 -->
+        <div class="modal-content">
+            <!-- 头部、主体、脚注 -->
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">提示消息</h4>
+            </div>
+            <div class="modal-body text-center">
+                <h4>确认要删除该照片吗？</h4>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="deletePhotoGraphId">
+                <button class="btn btn-primary" onclick="deletePhotoGraph()" data-dismiss="modal">删除</button>
+                <button class="btn btn-primary cancel" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 确认删除 end -->
 
 <script>
     //图片上传预览功能

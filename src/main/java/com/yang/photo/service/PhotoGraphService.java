@@ -15,4 +15,6 @@ public interface PhotoGraphService {
 
     int updatePhotoGraph(PhotoGraph photoGraph);
 
+    int deletePhotoGraphById(PhotoGraph photoGraph);
+
 }

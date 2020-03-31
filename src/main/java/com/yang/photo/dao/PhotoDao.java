@@ -15,6 +15,6 @@ public interface PhotoDao {
 
     Photo getFirstImage(PhotoGraph photoGraph);
 
-    int deletePhotoById(Photo photo);
+    int deletePhoto(Photo photo);
 
 }

@@ -11,7 +11,7 @@ public interface PhotoService {
 
     int batchAddPhoto(List<Photo> photos);
 
-    int deletePhotoById(Photo photo);
+    int deletePhoto(Photo photo);
 
     Photo getFirstImage(PhotoGraph photoGraph);
 }
