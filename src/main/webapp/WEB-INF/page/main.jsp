@@ -88,12 +88,12 @@
 
     }
 
-    function showModifyModal(id,name,description,permission,type) {
+    function showModifyModal(id,name,description,type,permission) {
         $('#modifyPhotoGraphId').val(id);
         $('#modifyGraphName').val(name);
         $('#modifyGraphDesc').val(description);
-        $('#modifyGraphType').val(type);
-        $('#modifyPermission').val(permission);
+        $('#modifyGraphType[value="'+type+'"]').prop("selected",true);
+        $('#modifyPermission[value="'+permission+'"]').prop("selected",true);
         $('#modifyPhotoGraphModal').modal('show');
     }
 
@@ -152,7 +152,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-th-large"></i> 应用</a></li>
             <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-user"></i> 好友列表</a></li>
-            <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-edit"></i> 个人资料</a></li>
+            <li class="nav-item"><a href="${pageContext.request.contextPath}/toPersonInfo"><i class="glyphicon glyphicon-edit"></i> 个人资料</a></li>
         </ul>
     </div>
 </nav>
@@ -255,13 +255,13 @@
                         <label class="col-sm-2 control-label">分类:</label>
                         <div class="col-sm-3">
                             <select class="form-control" id="graphType" name="type" onchange="">
-                                <option>最爱</option>
-                                <option>风景</option>
-                                <option>个人照</option>
-                                <option>活动</option>
-                                <option>家人</option>
-                                <option>动物</option>
-                                <option>其他</option>
+                                <option value="love">最爱</option>
+                                <option value="scenery">风景</option>
+                                <option value="personPhoto">个人照</option>
+                                <option value="active">活动</option>
+                                <option value="family">家人</option>
+                                <option value="animal">动物</option>
+                                <option value="other">其他</option>
                             </select>
                         </div>
                     </div>
@@ -329,9 +329,9 @@
                     <label class="col-sm-2 control-label">权限:</label>
                     <div class="col-sm-4">
                         <select class="form-control" id="modifyPermission" name="permission" onchange="">
-                            <option>所有人可见</option>
-                            <option>仅自己能见</option>
-                            <option>仅好友能见</option>
+                            <option value="everybody">所有人可见</option>
+                            <option value="oneself">仅自己能见</option>
+                            <option value="friend">仅好友能见</option>
                         </select>
                     </div>
                 </div>

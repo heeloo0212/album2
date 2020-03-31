@@ -28,4 +28,9 @@ public class UserServiceImpl implements UserService {
         }
         return 0;
     }
+
+    @Override
+    public int modifyUser(User user) {
+        return modifyUser(user);
+    }
 }

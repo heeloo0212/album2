@@ -1,6 +1,7 @@
 package com.yang.photo.controller;
 
 import com.yang.photo.pojo.PhotoGraph;
+import com.yang.photo.pojo.ResponseResult;
 import com.yang.photo.pojo.User;
 import com.yang.photo.service.PhotoGraphService;
 import com.yang.photo.service.UserService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -55,6 +57,31 @@ public class UserController {
             return "login";
         }
         return "error";
+    }
+
+    @RequestMapping("/toPersonInfo")
+    public String toPersonInfo(HttpSession session,Model model){
+        User user = (User) session.getAttribute("loginUser");
+        model.addAttribute("user",user);
+        return "personInfo";
+    }
+
+    @RequestMapping("/modifyUser")
+    @ResponseBody
+    public ResponseResult modifyUser(User user){
+        ResponseResult responseResult = new ResponseResult();
+        int result = 0;
+        if(user != null){
+            result = userService.modifyUser(user);
+        }
+        if(result > 0){
+            responseResult.setStatus(1);
+            responseResult.setMessage("修改成功");
+        }else{
+            responseResult.setStatus(0);
+            responseResult.setMessage("修改失败");
+        }
+        return responseResult;
     }
 
 

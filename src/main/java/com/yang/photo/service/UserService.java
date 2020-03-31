@@ -7,4 +7,6 @@ public interface UserService {
     User loginNameAndPassword(User user);
 
     int addUser(User user);
+
+    int modifyUser(User user);
 }
