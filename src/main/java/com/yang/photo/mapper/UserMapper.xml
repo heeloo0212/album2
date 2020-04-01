@@ -16,10 +16,14 @@
         id,name,password,age,sex,email
     </sql>
 
-    <select id="loginNameAndPassword" resultMap="userResultMap" parameterType="User">
+    <select id="getUser" resultMap="userResultMap" parameterType="User">
 
-        select * from user where name = #{name} and password = #{password}
-
+        select * from user
+        <where>
+            <if test="id != null and id != ''">id = #{id}</if>
+            <if test="name != null and name != ''">and name = #{name} </if>
+            <if test="password != null and password != ''">and password = #{password}</if>
+        </where>
     </select>
 
     <insert id="addUser" parameterType="com.yang.photo.pojo.User">

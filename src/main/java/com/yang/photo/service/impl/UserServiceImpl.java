@@ -13,10 +13,10 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User loginNameAndPassword(User user) {
+    public User getUser(User user) {
         User user1 = new User();
         if(user != null){
-            user1 = userDao.loginNameAndPassword(user);
+            user1 = userDao.getUser(user);
         }
         return user1;
     }
@@ -31,6 +31,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int modifyUser(User user) {
-        return modifyUser(user);
+        return userDao.modifyUser(user);
     }
 }

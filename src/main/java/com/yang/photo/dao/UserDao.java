@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserDao {
-    public User loginNameAndPassword(User user);
+    public User getUser(User user);
     int addUser(User user);
     int modifyUser(User user);
 }

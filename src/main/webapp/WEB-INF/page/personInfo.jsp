@@ -16,16 +16,45 @@
     <link rel="stylesheet" href="../css/mainCss.css">
     <link href="../css/signin.css" rel="stylesheet" type="text/css">
 </head>
+<script>
+    function modifyUser() {
+        $.ajax({
+            url:'${pageContext.request.contextPath}/modifyUser',
+            type:'post',
+            dataType:'json',
+            data:{'id':$('userId').val(),
+                'name':$('#name').val(),
+                'email':$('#email').val(),
+                'age':$('#age').val(),
+                'sex':$('#sex').val()
+            },
+            success:function(result){
+                if(result.status==1){
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'successMsg'
+                    },function(){
+                        //重新加载数据
+                        location.href='${pageContext.request.contextPath}/toPersonInfo';
+                    })
+                }else{
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'errorsMsg'
+                    })
+                }
+            }
+        })
+    }
+</script>
 <body>
 <div class="row" style="height: 80px; background-color: #c1e2b3">
     <div class="col-mid-12" style="text-align: center"><h1>个人相册</h1></div>
 </div>
-
-
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
         <ul class="nav navbar-nav">
-            <li class="nav-item active"><a href="#" >相册</a></li>
+            <li class="nav-item active"><a href="${pageContext.request.contextPath}/toMain" >相册</a></li>
             <li class="nav-item"><a href="#" >照片</a></li>
             <li class="nav-item"><a href="#" >视频</a></li>
         </ul>
@@ -47,22 +76,30 @@
 </div>
 <div class="container">
     <div class="form-horizontal">
-        <form class="form-signin" action="/addUser" method="post">
-            <label class="control-label">账号名:</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="${user.name}" /><br>
-            <label class="control-label">邮箱:</label>
-            <input type="text" id="email" name="email" class="form-control" placeholder="${user.email}"/><br>
-            <label class="control-label">年龄:</label>
-            <input type="text" id="age" name="age" class="form-control" placeholder="${user.age}"/><br>
-            <label class="control-label">性别:</label>
-            <input type="radio" name="sex" value="男"/><label>男</label>
-            <input type="radio" name="sex" value="女"/><label>女</label>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-warning" onclick="updateMes()">确认修改</button>
+                <label class="control-label col-md-3">账号名:</label>
+                <input type="text" id="name" name="name" class="form-control col-md-9" placeholder="${user.name}" style="width: 30%"/><br>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">邮箱:</label>
+                <input type="text" id="email" name="email" class="form-control col-md-9" placeholder="${user.email}" style="width: 30%"/><br>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">年龄:</label>
+                <input type="text" id="age" name="age" class="form-control col-md-9" placeholder="${user.age}" style="width: 30%"/><br>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">性别:</label>
+                <input type="radio" name="sex" value="男" checked="true"/><label>男</label>
+                <input type="radio" name="sex" value="女"/><label>女</label>
+                <%--<input type="hidden" id="userId" value="${user.id}">--%>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-md-4">
+                    <button type="button" class="btn btn-warning" onclick="modifyUser()">确认修改</button>
                 </div>
             </div>
-        </form>
     </div>
 </div>
 <div class="container">
