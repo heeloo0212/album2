@@ -1,11 +1,9 @@
 package com.yang.photo.controller;
 
-import com.yang.photo.pojo.Photo;
-import com.yang.photo.pojo.PhotoGraph;
-import com.yang.photo.pojo.ResponseResult;
-import com.yang.photo.pojo.User;
+import com.yang.photo.pojo.*;
 import com.yang.photo.service.PhotoGraphService;
 import com.yang.photo.service.PhotoService;
+import com.yang.photo.service.ShowPhotoService;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +30,9 @@ public class PhotoController {
     @Autowired
     private PhotoGraphService photoGraphService;
 
+    @Autowired
+    private ShowPhotoService showPhotoService;
+
     @RequestMapping("/getPhotos")
     public String getPhotos(Integer gid, Model model){
         if(gid != 0) {
@@ -47,11 +48,18 @@ public class PhotoController {
     @RequestMapping(value = "/addPhoto",method = RequestMethod.POST)
     public String addPhoto(Photo photo,HttpSession session,@RequestParam(value="file",required=false) MultipartFile[] file) throws Exception{
         List<Photo> photos = new ArrayList<>();
+
+        //将刚上传的图片存入到show_photo表中
+        List<ShowPhoto> showPhotos = new ArrayList<>();
+        String flag = UUID.randomUUID().toString();
+        ShowPhoto showPhoto;
+
         Photo photo1 =null;
         User user = (User)session.getAttribute("loginUser");
         int gid=photo.getGid();
         for (MultipartFile mf : file) {
             photo1=new Photo();
+            showPhoto = new ShowPhoto();
             if (!mf.isEmpty()) {
                 // 使用UUID给图片重命名，并去掉四个“-”
                 String name = UUID.randomUUID().toString().replaceAll("-", "");
@@ -68,10 +76,20 @@ public class PhotoController {
                 photo1.setGid(gid);
                 photo1.setCreateTime(new Date());
                 photos.add(photo1);
+
+                //将刚上传的图片存入到show_photo表中
+                showPhoto.setImage(path);
+                showPhoto.setFlag(flag);
+                showPhoto.setGraphId(gid);
+                showPhoto.setCreateTime(new Date());
+                showPhotos.add(showPhoto);
             }
         }
         //插入多张图片
         photoService.batchAddPhoto(photos);
+
+        //将刚上传的图片存入到show_photo表中
+        showPhotoService.batchAddShowPhoto(showPhotos);
 
         //将上传的第一张图片设置为相册的封面
         PhotoGraph photoGraph1 = new PhotoGraph();

@@ -44,7 +44,7 @@
             success:function(result){
                 if(result.status==1){
                     layer.msg(result.message,{
-                        time:2000,
+                        time:10,
                         skin:'successMsg'
                     },function(){
                         //重新加载数据

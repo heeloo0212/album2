@@ -48,4 +48,10 @@
 
     </delete>
 
+    <select id="getPhotoById" resultMap="PhotoResultMap" parameterType="int">
+
+        select * from photo where id = #{id}
+
+    </select>
+
 </mapper>
