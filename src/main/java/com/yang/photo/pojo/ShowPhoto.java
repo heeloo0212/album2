@@ -6,10 +6,9 @@ import java.util.Date;
 public class ShowPhoto implements Serializable {
     private int id;
     private String image;
-    private String flag;
+    private int activeId;
     private int photoId;
     private int graphId;
-    private Date createTime;
 
     public int getId() {
         return id;
@@ -27,12 +26,12 @@ public class ShowPhoto implements Serializable {
         this.image = image;
     }
 
-    public String getFlag() {
-        return flag;
+    public int getActiveId() {
+        return activeId;
     }
 
-    public void setFlag(String flag) {
-        this.flag = flag;
+    public void setActiveId(int activeId) {
+        this.activeId = activeId;
     }
 
     public int getPhotoId() {
@@ -51,11 +50,4 @@ public class ShowPhoto implements Serializable {
         this.graphId = graphId;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 }

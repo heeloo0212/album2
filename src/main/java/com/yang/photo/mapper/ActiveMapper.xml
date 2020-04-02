@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.photo.dao.ActionDao">
+    <resultMap id="activeResultMap" type="com.yang.photo.pojo.Active">
+        <id column="id" property="id"></id>
+        <result column="show_id" property="showId"></result>
+        <result column="comment_id" property="commentId"></result>
+        <result column="info" property="info"></result>
+        <result column="click" property="click"></result>
+        <result column="create_time" property="createTime"></result>
+    </resultMap>
+</mapper>

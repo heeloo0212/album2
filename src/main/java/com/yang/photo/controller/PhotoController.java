@@ -51,7 +51,6 @@ public class PhotoController {
 
         //将刚上传的图片存入到show_photo表中
         List<ShowPhoto> showPhotos = new ArrayList<>();
-        String flag = UUID.randomUUID().toString();
         ShowPhoto showPhoto;
 
         Photo photo1 =null;
@@ -79,9 +78,8 @@ public class PhotoController {
 
                 //将刚上传的图片存入到show_photo表中
                 showPhoto.setImage(path);
-                showPhoto.setFlag(flag);
+                showPhoto.setActiveId(1);
                 showPhoto.setGraphId(gid);
-                showPhoto.setCreateTime(new Date());
                 showPhotos.add(showPhoto);
             }
         }

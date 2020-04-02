@@ -7,7 +7,7 @@ public class Comment implements Serializable {
 
     private int id;
     private String content;
-    private String showFlag;
+    private int activeId;
     private String status;
     private String commentor;
     private String beCommentor;
@@ -29,12 +29,12 @@ public class Comment implements Serializable {
         this.content = content;
     }
 
-    public String getShowFlag() {
-        return showFlag;
+    public int getActiveId() {
+        return activeId;
     }
 
-    public void setShowFlag(String showFlag) {
-        this.showFlag = showFlag;
+    public void setActiveId(int activeId) {
+        this.activeId = activeId;
     }
 
     public String getStatus() {

@@ -6,13 +6,12 @@
     <resultMap id="showPhotoResultMap" type="com.yang.photo.pojo.ShowPhoto">
         <id column="id" property="id"></id>
         <result column="image" property="image"></result>
-        <result column="flag" property="flag"></result>
+        <result column="active_id" property="activeId"></result>
         <result column="photo_id" property="photoId"></result>
         <result column="graph_id" property="graphId"></result>
-        <result column="create_time" property="createTime"></result>
     </resultMap>
     <sql id="column_list">
-        image,flag,photo_id,graph_id,create_time
+        image,active_id,photo_id,graph_id
     </sql>
 
     <insert id="batchAddShowPhoto" parameterType="java.util.List">
@@ -20,7 +19,7 @@
         insert into show_photo(<include refid="column_list"/>) values
         <trim suffixOverrides=",">
         <foreach collection="list" item="item" index="index">
-            (#{item.image},#{item.flag},#{item.photoId},#{item.graphId},#{item.createTime}),
+            (#{item.image},#{item.activeId},#{item.photoId},#{item.graphId}),
         </foreach>
         </trim>
     </insert>
@@ -31,9 +30,8 @@
         <where>
             <if test="photoId != null and photoId != ''">and photo_id = #{photoId}</if>
             <if test="graphId != null and graphId != ''">and graph_id = #{graphId}</if>
-            <if test="flag != null and flag != ''">and flag = #{flag}</if>
+            <if test="activeId != null and activeId != ''">and active_id = #{activeId}</if>
         </where>
-        order by create_time desc
 
     </select>
 </mapper>

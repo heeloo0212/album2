@@ -1,11 +1,8 @@
 package com.yang.photo.service.impl;
 
 import com.yang.photo.dao.PhotoDao;
-import com.yang.photo.dao.PhotoGraphDao;
-import com.yang.photo.dao.UserDao;
 import com.yang.photo.pojo.Photo;
 import com.yang.photo.pojo.PhotoGraph;
-import com.yang.photo.pojo.User;
 import com.yang.photo.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +15,6 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Autowired
     private PhotoDao photoDao;
-
-    @Autowired
-    private PhotoGraphDao photoGraphDao;
-
-    @Autowired
-    private UserDao userDao;
 
     @Override
     public List<Photo> getPhotoListByGid(Photo photo) {

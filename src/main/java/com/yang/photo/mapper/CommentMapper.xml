@@ -6,25 +6,25 @@
     <resultMap id="commentResultMap" type="com.yang.photo.pojo.Comment">
         <id column="id" property="id"></id>
         <result column="content" property="content"></result>
-        <result column="show_flag" property="showFlag"></result>
+        <result column="active_id" property="activeId"></result>
         <result column="status" property="status"></result>
         <result column="commentor" property="commentor"></result>
         <result column="be_commentor" property="beCommentor"></result>
         <result column="comment_time" property="commentTime"></result>
     </resultMap>
     <sql id="column_list">
-        content,show_flag,status,commentor,be_commentor,comment_time
+        content,active_id,status,commentor,be_commentor,comment_time
     </sql>
     <insert id="addComment" parameterType="com.yang.photo.pojo.Comment">
 
         insert into comment(<include refid="column_list"/>) values
-        (#{content},#{showFlag},#{status},#{commentor},#{beCommentor},#{commentTime})
+        (#{content},#{activeId},#{status},#{commentor},#{beCommentor},#{commentTime})
 
     </insert>
 
     <select id="getComments" resultMap="commentResultMap" parameterType="com.yang.photo.pojo.Comment">
 
-        select * from comment where show_flag = #{showFlag}
+        select * from comment where active_id = #{activeId}
 
     </select>
 
