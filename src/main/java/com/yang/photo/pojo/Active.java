@@ -2,20 +2,27 @@ package com.yang.photo.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Active implements Serializable {
 
     private int id;
 
-    private int showId;
+    private int graphId;
 
-    private int commentId;
+    private String graphName;
+
+    private String userName;
 
     private String info;
 
     private int click;
 
     private Date createTime;
+
+    private List<ShowPhoto> showPhotoList;
+
+    private List<Comment> commentList;
 
     public int getId() {
         return id;
@@ -25,20 +32,12 @@ public class Active implements Serializable {
         this.id = id;
     }
 
-    public int getShowId() {
-        return showId;
+    public int getGraphId() {
+        return graphId;
     }
 
-    public void setShowId(int showId) {
-        this.showId = showId;
-    }
-
-    public int getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(int commentId) {
-        this.commentId = commentId;
+    public void setGraphId(int graphId) {
+        this.graphId = graphId;
     }
 
     public String getInfo() {
@@ -63,5 +62,43 @@ public class Active implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public List<ShowPhoto> getShowPhotoList() {
+        return showPhotoList;
+    }
+
+    public void setShowPhotoList(List<ShowPhoto> showPhotoList) {
+        this.showPhotoList = showPhotoList;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
+    }
+
+    public String getGraphName() {
+        return graphName;
+    }
+
+    public void setGraphName(String graphName) {
+        this.graphName = graphName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    @Override public String toString() {
+        return "Active{" + "id=" + id + ", graphId=" + graphId + ", graphName='" + graphName + '\'' + ", userName='"
+            + userName + '\'' + ", info='" + info + '\'' + ", click=" + click + ", createTime=" + createTime
+            + ", showPhotoList=" + showPhotoList + ", commentList=" + commentList + '}';
     }
 }

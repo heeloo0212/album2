@@ -91,8 +91,4 @@ public class UserController {
         return "friends";
     }
 
-    @RequestMapping("/toShowAllPhotos")
-    public String toShowAllPhotos(){
-        return  "showAllPhotos";
-    }
 }

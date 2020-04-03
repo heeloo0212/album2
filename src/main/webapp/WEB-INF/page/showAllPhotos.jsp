@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -38,18 +40,21 @@
     <div id="main">
         <div id="list">
             <ul>
+                <c:forEach items="${activeList}" var="active">
                 <li>
                     <div class="po-avt-wrap">
-                        <h3>2020/4/1 16:55</h3>
+                        <h3><fmt:formatDate value="${active.createTime}" pattern="yyyy-MM-dd HH:mm"/></h3>
                     </div>
                     <div class="po-cmt">
                         <div class="po-hd">
-                            <p class=""><span class="data-name po-name">万虎科技~贾素杰</span>&nbsp;<span>上传图片</span></p>
+                            <p class=""><span class="data-name po-name">${active.userName}</span>&nbsp;<span>上传图片到:《${active.graphName}》</span></p>
                             <div class="post">
                                 <p>
-                                    <img class="list-img" src="images/jt1.jpg" style="height: 80px;">
-                                    <img class="list-img" src="images/yt3.jpg" style="height: 80px;">
-                                    <img class="list-img data-avt" src="images/0.jpg" style="height: 80px;">
+                                    <c:forEach items="${active.showPhotoList}" var="photo">
+                                       <img class="list-img" src="${photo.image}" style="height: 80px;">
+                                    </c:forEach>
+                                    <%--<img class="list-img" src="images/yt3.jpg" style="height: 80px;">
+                                    <img class="list-img data-avt" src="images/0.jpg" style="height: 80px;">--%>
                                 </p>
                             </div>
                             <p class="time">刚刚</p><img class="c-icon" src="images/c.png">
@@ -60,24 +65,14 @@
                             <div class="cmt-list">
                                 <p><span>wu世勋-EXO：</span>나는 서명～</p>
                                 <p><span>鹿晗：</span>我们在国内冻成狗，我也想跟哥您去热热～</p>
-                                <p><span>权志龙：</span>나는 서명～</p>
-                                <p><span>王思聪：</span>去哪玩啊？那么爽</p>
-                                <p>
-                                    <span class="data-name">万虎科技~贾素杰</span>
-                                    回复
-                                    <span>
-                                            王思聪
-                                        </span>
-                                    <span>
-                                            ：
-                                        </span>
+                                <p><span class="data-name">万虎科技~贾素杰</span>回复<span>王思聪</span><span>：</span>
                                     澳洲大堡礁，这边刚好是夏季，挺适合避寒的。
                                 </p>
-                                <p><span>杨幂：</span>😘私人飞机出行，求带上我～</p>
                             </div>
                         </div>
                     </div>
                 </li>
+                </c:forEach>
                 <li>
                     <div class="po-avt-wrap">
                         <h3>2020/4/1 16:55</h3>

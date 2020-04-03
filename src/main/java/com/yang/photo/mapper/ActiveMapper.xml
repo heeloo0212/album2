@@ -2,13 +2,33 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yang.photo.dao.ActionDao">
+<mapper namespace="com.yang.photo.dao.ActiveDao">
     <resultMap id="activeResultMap" type="com.yang.photo.pojo.Active">
         <id column="id" property="id"></id>
-        <result column="show_id" property="showId"></result>
-        <result column="comment_id" property="commentId"></result>
+        <result column="graph_id" property="graphId"></result>
+        <result column="graph_name" property="graphName"></result>
+        <result column="user_name" property="userName"></result>
         <result column="info" property="info"></result>
         <result column="click" property="click"></result>
         <result column="create_time" property="createTime"></result>
     </resultMap>
+
+    <sql id="column_list">
+        graph_id,graph_name,user_name,info,click,create_time
+    </sql>
+
+    <select id="getActiveList" resultMap="activeResultMap">
+
+        select * from active
+        order by create_time desc
+
+    </select>
+
+    <insert id="addActive" keyProperty="id" useGeneratedKeys="true" parameterType="com.yang.photo.pojo.Active">
+
+        insert into active(<include refid="column_list"/>) values
+        (#{graphId},#{graphName},#{userName},#{info},#{click},#{createTime})
+
+    </insert>
+
 </mapper>

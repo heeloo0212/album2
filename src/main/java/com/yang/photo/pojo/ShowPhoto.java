@@ -8,7 +8,6 @@ public class ShowPhoto implements Serializable {
     private String image;
     private int activeId;
     private int photoId;
-    private int graphId;
 
     public int getId() {
         return id;
@@ -42,12 +41,5 @@ public class ShowPhoto implements Serializable {
         this.photoId = photoId;
     }
 
-    public int getGraphId() {
-        return graphId;
-    }
-
-    public void setGraphId(int graphId) {
-        this.graphId = graphId;
-    }
 
 }

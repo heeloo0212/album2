@@ -29,7 +29,7 @@ public class PhotoServiceImpl implements PhotoService {
     @Override public int deletePhoto(Photo photo) {
         //删除文件存的照片
         Photo photo1 = photoDao.getPhotoById(photo.getId());
-        String deletePath = photo1.getImage() ;
+        String deletePath = "/WEB-INF/" + photo1.getImage() ;
         System.out.println(deletePath);
         File deleteFile = new File(deletePath);
         if(deleteFile.exists()){

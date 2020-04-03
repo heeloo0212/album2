@@ -1,6 +1,7 @@
 package com.yang.photo.controller;
 
 import com.yang.photo.pojo.*;
+import com.yang.photo.service.ActiveService;
 import com.yang.photo.service.PhotoGraphService;
 import com.yang.photo.service.PhotoService;
 import com.yang.photo.service.ShowPhotoService;
@@ -31,7 +32,7 @@ public class PhotoController {
     private PhotoGraphService photoGraphService;
 
     @Autowired
-    private ShowPhotoService showPhotoService;
+    private ActiveService activeService;
 
     @RequestMapping("/getPhotos")
     public String getPhotos(Integer gid, Model model){
@@ -52,10 +53,12 @@ public class PhotoController {
         //将刚上传的图片存入到show_photo表中
         List<ShowPhoto> showPhotos = new ArrayList<>();
         ShowPhoto showPhoto;
+        Active active = new Active();
 
         Photo photo1 =null;
         User user = (User)session.getAttribute("loginUser");
         int gid=photo.getGid();
+        PhotoGraph photoGraph = photoGraphService.getPhotoGraphById(gid);
         for (MultipartFile mf : file) {
             photo1=new Photo();
             showPhoto = new ShowPhoto();
@@ -78,20 +81,22 @@ public class PhotoController {
 
                 //将刚上传的图片存入到show_photo表中
                 showPhoto.setImage(path);
-                showPhoto.setActiveId(1);
-                showPhoto.setGraphId(gid);
                 showPhotos.add(showPhoto);
+
+                //添加一条刚上传图片的动态
+                active.setGraphId(gid);
+                active.setUserName(user.getName());
+                active.setGraphName(photoGraph.getName());
+                active.setCreateTime(new Date());
             }
         }
         //插入多张图片
         photoService.batchAddPhoto(photos);
 
-        //将刚上传的图片存入到show_photo表中
-        showPhotoService.batchAddShowPhoto(showPhotos);
+        activeService.addActive(active,showPhotos);
 
         //将上传的第一张图片设置为相册的封面
         PhotoGraph photoGraph1 = new PhotoGraph();
-        PhotoGraph photoGraph = photoGraphService.getPhotoGraphById(gid);
         photoGraph1.setId(gid);
         photoGraph1.setImage(photoService.getFirstImage(photoGraph).getImage());
         photoGraphService.updatePhotoGraph(photoGraph1);
