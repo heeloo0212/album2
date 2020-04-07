@@ -151,7 +151,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-th-large"></i> 应用</a></li>
-            <li class="nav-item"><a href="${pageContext.request.contextPath}/toFriends"><i class="glyphicon glyphicon-user"></i> 好友列表</a></li>
+            <li class="nav-item"><a href="${pageContext.request.contextPath}/getAllFriend"><i class="glyphicon glyphicon-user"></i> 好友列表</a></li>
             <li class="nav-item"><a href="${pageContext.request.contextPath}/toPersonInfo"><i class="glyphicon glyphicon-edit"></i> 个人资料</a></li>
         </ul>
     </div>

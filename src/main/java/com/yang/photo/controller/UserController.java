@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -83,6 +84,17 @@ public class UserController {
             responseResult.setStatus(0);
             responseResult.setMessage("修改失败");
         }
+        return responseResult;
+    }
+
+    @RequestMapping("/getUser")
+    @ResponseBody
+    public ResponseResult getUser(String name){
+        ResponseResult responseResult = new ResponseResult();
+        User user = new User();
+        user.setName(name);
+        User user1 = userService.getUser(user);
+        responseResult.setData(user1);
         return responseResult;
     }
 

@@ -1,6 +1,7 @@
 package com.yang.photo.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Relation implements Serializable {
 
@@ -13,6 +14,10 @@ public class Relation implements Serializable {
     private String talkRoom;
 
     private String status;
+
+    private String friendGroup;
+
+    private List<User> userList;
 
     public int getId() {
         return id;
@@ -52,5 +57,21 @@ public class Relation implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getFriendGroup() {
+        return friendGroup;
+    }
+
+    public void setFriendGroup(String friendGroup) {
+        this.friendGroup = friendGroup;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.photo.dao.RelationDao">
+    <resultMap id="relationResultMap" type="com.yang.photo.pojo.Relation">
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="friend_id" property="friendId"></result>
+        <result column="friend_group" property="friendGroup"></result>
+        <result column="talk_room" property="talkRoom"></result>
+        <result column="status" property="status"></result>
+        <collection property="userList" ofType="com.yang.photo.pojo.User">
+            <id column="id" property="id"></id>
+            <result column="name" property="name"></result>
+            <result column="sex" property="sex"></result>
+            <result column="age" property="age"></result>
+            <result column="email" property="email"></result>
+        </collection>
+    </resultMap>
+
+    <sql id="column_list">
+        user_id,friend_id,friend_group,talk_room,status
+    </sql>
+
+    <select id="getAllFriendByUserId" resultMap="relationResultMap" parameterType="com.yang.photo.pojo.Relation">
+
+         SELECT r.user_id,r.friend_id,r.friend_group,r.talk_room,u.name,u.age,u.sex FROM relation AS r LEFT JOIN USER AS u
+         ON r.friend_id = u.id
+         WHERE STATUS=1 AND r.user_id = #{userId}
+
+    </select>
+
+    <insert id="addFriend" parameterType="com.yang.photo.pojo.Relation">
+
+        insert into relation(<include refid="column_list"/>)
+        values (user_id = #{userId},friend_id = #{friendId},friend_group = #{friendGrroup},talk_room = #{talkRoom},status = #{status})
+
+    </insert>
+
+    <delete id="deleteFriend" parameterType="com.yang.photo.pojo.Relation">
+
+        delete from relation where friend_id = #{friendId}
+
+    </delete>
+
+    <update id="updateRelation" parameterType="com.yang.photo.pojo.Relation">
+
+        update relation
+        <set>
+            <if test="friendGroup != null and friendGroup != ''">friend_group = #{friendGroup}</if>
+            <if test="talkRoom != null and talkRoom != ''">talk_room = #{talkRoom}</if>
+            <if test="status != null and status != ''">status = #{status}</if>
+        </set>
+        where user_id = #{userId} and friend_id = #{friendId}
+
+    </update>
+
+</mapper>
