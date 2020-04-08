@@ -37,10 +37,10 @@
 
         update user
         <set>
-            <if test="name != null and name != ''">name = #{name}</if>
-            <if test="password != null and password != ''">password = #{password}</if>
-            <if test="age != null and age != ''">age = #{age}</if>
-            <if test="sex != null and sex != ''">sex = #{sex}</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="age != null and age != ''">age = #{age},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
             <if test="email != null and email != ''">email = #{email}</if>
         </set>
         where id = #{id}

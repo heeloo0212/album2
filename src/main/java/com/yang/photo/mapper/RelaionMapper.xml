@@ -34,7 +34,7 @@
     <insert id="addFriend" parameterType="com.yang.photo.pojo.Relation">
 
         insert into relation(<include refid="column_list"/>)
-        values (user_id = #{userId},friend_id = #{friendId},friend_group = #{friendGrroup},talk_room = #{talkRoom},status = #{status})
+        values (#{userId},#{friendId},#{friendGroup},#{talkRoom},#{status})
 
     </insert>
 
@@ -48,8 +48,8 @@
 
         update relation
         <set>
-            <if test="friendGroup != null and friendGroup != ''">friend_group = #{friendGroup}</if>
-            <if test="talkRoom != null and talkRoom != ''">talk_room = #{talkRoom}</if>
+            <if test="friendGroup != null and friendGroup != ''">friend_group = #{friendGroup},</if>
+            <if test="talkRoom != null and talkRoom != ''">talk_room = #{talkRoom},</if>
             <if test="status != null and status != ''">status = #{status}</if>
         </set>
         where user_id = #{userId} and friend_id = #{friendId}

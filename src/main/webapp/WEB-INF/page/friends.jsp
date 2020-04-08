@@ -15,6 +15,7 @@
     <script src="../js/bootstrap.js"></script>
     <script src="${pageContext.request.contextPath}/layer/layer.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link href="../css/signin.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="../css/bootstrap.css">
 </head>
 <script>
@@ -29,11 +30,65 @@
             /*dateType:'json',*/
             data:{'name':$('#userName').val()},
             success:function (result) {
-                console.log(result.data.name);
+                console.log(result.data.id);
                 $('#userInfoName').text(result.data.name);
                 $('#userInfoSex').text(result.data.sex);
                 $('#userInfoAge').text(result.data.age);
                 $('#userInfoId').val(result.data.id);
+            }
+        })
+    }
+
+    function addFriend() {
+        $.ajax({
+            url:'${pageContext.request.contextPath}/addFriend',
+            type:'post',
+            dataType:'json',
+            data:{'id':$('#userInfoId').val(),
+                'friendGroup':$('#friendGroup').val()
+            },
+            success:function(result){
+                if(result.status==1){
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'successMsg'
+                    },function(){
+                        //重新加载数据
+                        location.href='${pageContext.request.contextPath}/getAllFriend';
+                    })
+                }else{
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'errorsMsg'
+                    })
+                }
+            }
+        })
+    }
+
+    function ModifyValidaMes(userId,friendId) {
+        $.ajax({
+            url:'${pageContext.request.contextPath}/modifyValidaMes',
+            type:'post',
+            dataType:'json',
+            data:{'userId':userId,
+                'friendId':friendId
+            },
+            success:function(result){
+                if(result.status==1){
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'successMsg'
+                    },function(){
+                        //重新加载数据
+                        location.href='${pageContext.request.contextPath}/getAllFriend';
+                    })
+                }else{
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'errorsMsg'
+                    })
+                }
             }
         })
     }
@@ -67,6 +122,21 @@
             <ul class="fl">
                 <li>
                     <input type="checkbox" checked>
+                    <i></i>
+                    <label class="control-label" id="validaMes" value="classmate">验证消息</label>
+                    <p>
+                        <c:forEach items="${validaMesList}" var="validaMes">
+                            <label>${validaMes.user.name}</label>&nbsp;&nbsp;
+                            <%--<label style="height: 2px;width: 2px">--%>
+                            <c:if test="${validaMes.user.sex=='男'}"><img src="${pageContext.request.contextPath}/iconfont/性别男.svg" style="width: 2px;height: 2px"></c:if>
+                            <c:if test="${validaMes.user.sex=='女'}"><img src="${pageContext.request.contextPath}/iconfont/性别女.svg" style="width: 2px;height: 2px"></c:if>
+                            <%--</label>--%>
+                            <button class="btn btn-sm btn-success" onclick="ModifyValidaMes(${validaMes.userId},${validaMes.friendId})" style="float: right">添加</button>
+                        </c:forEach>
+                    </p>
+                </li>
+                <li>
+                    <input type="checkbox" checked>
                     <i onclick="getFriends($('#friend').html().trim())"></i>
                     <label class="control-label" id="friend" value="friend">朋友</label>
                     <p>
@@ -77,12 +147,6 @@
                                 <span class="glyphicon glyphicon-comment" onclick="" style="float: right"></span><br>
                             </c:forEach>
                         </c:forEach>
-                        <%--<label class="glyphicon glyphicon-user">&nbsp;克莱</label>
-                        <span class="glyphicon glyphicon-comment" onclick="" style="float: right"></span><br>
-                        <label class="glyphicon glyphicon-user">&nbsp;格林</label>
-                        <span class="glyphicon glyphicon-comment" onclick="" style="float: right"></span><br>
-                        <label class="glyphicon glyphicon-user">&nbsp;杜兰特</label>
-                        <span class="glyphicon glyphicon-comment" onclick="" style="float: right"></span><br>--%>
                     </p>
                 </li>
                 <li>
@@ -132,7 +196,7 @@
                 </div>
                 <div id="userInfo" class="row">
                     <br>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label class="control-label">名称:</label><label id="userInfoName" class="control-label"style="font-size: larger;color: #bd2c00"></label>
                     </div>
                     <div class="col-md-2">
@@ -141,14 +205,21 @@
                     <div class="col-md-2">
                         <label class="control-label">年龄:</label><label id="userInfoAge" class="control-label" style="font-size: larger;color: #bd2c00"></label>
                     </div>
+                    <div class="col-md-3">
+                        <select class="form-control" name="friendGroup" id="friendGroup">
+                            <option value="friend">朋友</option>
+                            <option value="family">家人</option>
+                            <option value="classmate">同学</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary" onclick="addFriend()">添加</button>
+                    </div>
                 </div>
                 <input type="text" class="hidden" id="userInfoId" value="">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                </button>
-                <button type="button" class="btn btn-primary">
-                    添加好友
                 </button>
             </div>
         </div><!-- /.modal-content -->
