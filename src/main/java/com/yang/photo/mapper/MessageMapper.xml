@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.photo.dao.messageDao">
+    <resultMap id="messageResultMap" type="com.yang.photo.pojo.Message">
+        <id column="id" property="id"></id>
+        <result column="content" property="content"></result>
+        <result column="talk_room" property="talkRoom"></result>
+        <result column="create_time" property="createTime"></result>
+    </resultMap>
+    <sql id="column_list">
+        content,talk_room,create_time
+    </sql>
+
+    <insert id="addMessage" parameterType="com.yang.photo.pojo.Message">
+
+        insert into message(<include refid="column_list"/>) values
+        (content = #{content},talk_room = #{talkRoom},create_time = #{createTime})
+
+    </insert>
+
+</mapper>

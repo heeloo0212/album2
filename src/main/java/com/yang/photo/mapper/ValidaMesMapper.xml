@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yang.photo.dao.ValidaMesDao">
+    <resultMap id="validaMesResultMap" type="com.yang.photo.pojo.ValidaMes">
+        <id column="id" property="id"></id>
+        <result column="mes" property="mes"></result>
+        <result column="v_user_id" property="userId"></result>
+        <result column="v_friend_id" property="friendId"></result>
+        <result column="v_status" property="status"></result>
+    </resultMap>
+
+    <sql id="column_list">
+        mes,v_user_id,v_friend_id,v_status
+    </sql>
+
+    <select id="getValidaMes" resultMap="validaMesResultMap" parameterType="com.yang.photo.pojo.ValidaMes">
+
+        select * from valida_mes where v_user_id = #{userId} and v_status = '0'
+
+    </select>
+
+    <insert id="addValidaMes" parameterType="com.yang.photo.pojo.ValidaMes">
+
+        insert into valida_mes(<include refid="column_list"/>)
+        values (#{mes},#{userId},#{friendId},#{status})
+
+    </insert>
+
+    <update id="updateValidaMes" parameterType="com.yang.photo.pojo.ValidaMes">
+
+        update valida_mes
+        <set>
+            <if test="mes != null and mes != ''">mes = #{mes},</if>
+            <if test="status != null and mes != ''">v_status = #{status}</if>
+        </set>
+        where v_user_id = #{userId} and v_friend_id = #{friendId}
+
+    </update>
+
+</mapper>
