@@ -40,7 +40,7 @@
 
     <delete id="deleteFriend" parameterType="com.yang.photo.pojo.Relation">
 
-        delete from relation where friend_id = #{friendId}
+        delete from relation where friend_id = #{friendId} and user_id = #{userId}
 
     </delete>
 
@@ -55,5 +55,11 @@
         where user_id = #{userId} and friend_id = #{friendId}
 
     </update>
+
+    <select id="getRelationByUIdAndFId" resultMap="relationResultMap" parameterType="com.yang.photo.pojo.Relation">
+
+        select * from relation where user_id = #{userId} and friend_id = #{friendId}
+
+    </select>
 
 </mapper>

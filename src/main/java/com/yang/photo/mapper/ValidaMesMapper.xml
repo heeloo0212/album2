@@ -39,4 +39,10 @@
 
     </update>
 
+    <select id="getValidaMesByUIdAndFid" resultMap="validaMesResultMap" parameterType="com.yang.photo.pojo.ValidaMes">
+
+        select * from valida_mes where v_user_id = #{userId} and v_friend_id = #{friendId}
+
+    </select>
+
 </mapper>

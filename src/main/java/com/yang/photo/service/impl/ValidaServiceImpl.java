@@ -38,4 +38,11 @@ public class ValidaServiceImpl implements ValidaMesService {
     @Override public int updateValidaMes(ValidaMes validaMes) {
         return validaMesDao.updateValidaMes(validaMes);
     }
+
+    @Override public ValidaMes getValidaMesByUIdAndFid(int userId, int friendId) {
+        ValidaMes validaMes = new ValidaMes();
+        validaMes.setUserId(userId);
+        validaMes.setFriendId(friendId);
+        return validaMesDao.getValidaMesByUIdAndFid(validaMes);
+    }
 }

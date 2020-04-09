@@ -7,6 +7,8 @@ import com.yang.photo.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MessageServiceImpl implements MessageService {
 
@@ -15,5 +17,9 @@ public class MessageServiceImpl implements MessageService {
 
     @Override public int addMessage(Message message) {
         return messageDao.addMessage(message);
+    }
+
+    @Override public List<Message> getMessage(Message message) {
+        return messageDao.getMessage(message);
     }
 }

@@ -6,6 +6,8 @@ public class Message {
 
     private int id;
 
+    private String talker;
+
     private String content;
 
     private String talkRoom;
@@ -42,5 +44,13 @@ public class Message {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getTalker() {
+        return talker;
+    }
+
+    public void setTalker(String talker) {
+        this.talker = talker;
     }
 }

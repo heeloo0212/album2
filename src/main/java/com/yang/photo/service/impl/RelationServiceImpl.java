@@ -29,4 +29,13 @@ public class RelationServiceImpl implements RelationService {
     @Override public int updateRelation(Relation relation) {
         return relationDao.updateRelation(relation);
     }
+
+    @Override public Relation getRelationByUIdAndFId(int userId, int friendId) {
+        Relation relation = new Relation();
+        if(userId != 0 && friendId != 0) {
+            relation.setUserId(userId);
+            relation.setFriendId(friendId);
+        }
+        return relationDao.getRelationByUIdAndFId(relation);
+    }
 }

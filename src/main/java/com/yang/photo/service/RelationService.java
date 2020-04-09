@@ -13,4 +13,6 @@ public interface RelationService {
     int deleteFriend(Relation relation);
 
     int updateRelation(Relation relation);
+
+    Relation getRelationByUIdAndFId(int userId, int friendId);
 }

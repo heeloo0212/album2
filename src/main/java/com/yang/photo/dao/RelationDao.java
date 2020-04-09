@@ -15,4 +15,6 @@ public interface RelationDao {
     int deleteFriend(Relation relation);
 
     int updateRelation(Relation relation);
+
+    Relation getRelationByUIdAndFId(Relation relation);
 }

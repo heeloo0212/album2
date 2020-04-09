@@ -11,4 +11,6 @@ public interface ValidaMesService {
     int addValidaMes(ValidaMes validaMes);
 
     int updateValidaMes(ValidaMes validaMes);
+
+    ValidaMes getValidaMesByUIdAndFid(int userId,int friendId);
 }

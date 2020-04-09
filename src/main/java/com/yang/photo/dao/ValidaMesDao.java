@@ -13,4 +13,6 @@ public interface ValidaMesDao {
     int addValidaMes(ValidaMes validaMes);
 
     int updateValidaMes(ValidaMes validaMes);
+
+    ValidaMes getValidaMesByUIdAndFid(ValidaMes validaMes);
 }
