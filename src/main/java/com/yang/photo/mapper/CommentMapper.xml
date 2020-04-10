@@ -24,7 +24,7 @@
 
     <select id="getComments" resultMap="commentResultMap" parameterType="com.yang.photo.pojo.Comment">
 
-        select * from comment where active_id = #{activeId}
+        select * from comment where active_id = #{activeId} order by comment_time asc
 
     </select>
 

@@ -1,8 +1,10 @@
 package com.yang.photo.service.impl;
 
 import com.yang.photo.dao.ActiveDao;
+import com.yang.photo.dao.CommentDao;
 import com.yang.photo.dao.ShowPhotoDao;
 import com.yang.photo.pojo.Active;
+import com.yang.photo.pojo.Comment;
 import com.yang.photo.pojo.ShowPhoto;
 import com.yang.photo.service.ActiveService;
 import com.yang.photo.service.ShowPhotoService;
@@ -23,13 +25,22 @@ public class ActiveServiceImpl implements ActiveService {
     @Autowired
     private ShowPhotoService showPhotoService;
 
+    @Autowired
+    private CommentDao commentDao;
+
     @Override public List<Active> getActiveList() {
         List<Active> activeList = activeDao.getActiveList();
         ShowPhoto showPhoto = new ShowPhoto();
+        Comment comment = new Comment();
         for(Active a : activeList){
             showPhoto.setActiveId(a.getId());
             List<ShowPhoto> showPhotoList = showPhotoDao.getShowPhoto(showPhoto);
+
+            comment.setActiveId(a.getId());
+            List<Comment> commentList = commentDao.getComments(comment);
+
             a.setShowPhotoList(showPhotoList);
+            a.setCommentList(commentList);
         }
         return activeList;
     }

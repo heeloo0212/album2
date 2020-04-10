@@ -55,7 +55,7 @@ public class RelationController {
         int result = 0;
         System.out.println(id);
         if(friendGroup != null && id != 0) {
-            String uuid = UUID.randomUUID().toString();
+            String uuid = UUID.randomUUID().toString().replaceAll("-","");
             User user = (User)session.getAttribute("loginUser");
 
             Relation relation2 = relationService.getRelationByUIdAndFId(user.getId(), id);

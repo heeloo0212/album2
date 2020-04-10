@@ -68,4 +68,10 @@ public class Comment implements Serializable {
     public void setCommentTime(Date commentTime) {
         this.commentTime = commentTime;
     }
+
+    @Override public String toString() {
+        return "Comment{" + "id=" + id + ", content='" + content + '\'' + ", activeId=" + activeId + ", status='"
+            + status + '\'' + ", commentor='" + commentor + '\'' + ", beCommentor='" + beCommentor + '\''
+            + ", commentTime=" + commentTime + '}';
+    }
 }

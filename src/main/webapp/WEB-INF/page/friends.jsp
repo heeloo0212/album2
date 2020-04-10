@@ -16,6 +16,7 @@
     <script src="${pageContext.request.contextPath}/layer/layer.js"></script>
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
     <link href="../css/signin.css" rel="stylesheet" type="text/css">
+    <link href="../css/chat.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/bootstrap.css">
 </head>
 <script>
@@ -133,10 +134,7 @@
         })
     }
 
-    function showMessageModal(talkRoom) {
-        console.log(talkRoom)
-        $('#messageModal').modal('show');
-    }
+
 
 </script>
 <body style="background: lightblue">
@@ -189,7 +187,7 @@
                             <c:forEach items="${relation.userList}" var="userFriend">
                                 <label class="glyphicon glyphicon-user" id="userFriendName">&nbsp;${userFriend.name}</label>
                                 <span class="glyphicon glyphicon-trash" onclick="showDeleteModal(${relation.friendId})" style="float: right"></span>&nbsp;
-                                <span class="glyphicon glyphicon-comment" onclick="showMessageModal(${relation.talkRoom})" style="float: right"></span><br>
+                                <span class="glyphicon glyphicon-comment" onclick="showMessageModal('${relation.talkRoom}')" style="float: right"></span><br>
                             </c:forEach>
                         </c:forEach>
                     </p>
@@ -314,7 +312,32 @@
                 </h4>
             </div>
             <div class="modal-body" style="text-align: center">
+                <div id="messageBody" style="border: #26337e inset 2px">
+                    <div id="getMessage" style="width: 566px;height: 300px;border: #2dc462 inset 1px">
+                        <ul class="left">
+                            <li style="list-style-type: none">
+                                <label class="control-label"> 老王： 很高兴见到你</label>
+                            </li>
+                        </ul>
+                        <br>
+                        <ul class="right">
+                            <li style="list-style-type: none">
+                                <label class="control-label">我也是：小杨</label>
+                            </li>
+                        </ul>
 
+                    </div>
+                    <div style="width: 564px;height: 30px; background: #bce8f1"></div>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <textarea class="form-control" cols="" rows="1" id="sendMes" placeholder="请输入留言内容"></textarea>
+                        </div>
+                        <div class="col-md-2" style="text-align: center">
+                            <button class="btn btn-primary" onclick="" style="position:relative;float: right">发送</button>
+                        </div>
+                    </div>
+                    <br>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -323,6 +346,21 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+<script>
+    function showMessageModal(talkRoom) {
+        console.log(talkRoom);
+        $('#messageModel').modal('show');
+        /*$.ajax({
+            url:'/getMessage',
+            type:"post",
+            data:{
+                'talkRoom':talkRoom,
+            },
+            success:function (result) {
 
+            }
+        })*/
+    }
+</script>
 </body>
 </html>
