@@ -24,6 +24,26 @@
         var beCommentor = commentorName;
         console.log(beCommentor);
         $('#addComment'+activeId).toggle();
+        $('#addCommentBtn').click(function () {
+            var content = $('#CommentCon').val();
+            if(content != null){
+                $.ajax({
+                    url:'${pageContext.request.contextPath}/addComment',
+                    type:'post',
+                    dataType:'json',
+                    data:{
+                        'activeId':activeId,
+                        'beCommentor':beCommentor,
+                        'content':content
+                    },
+                    success:function (result) {
+                        if(result.status==1){
+                            location.href='${pageContext.request.contextPath}/toShowAllPhotos';
+                        }
+                    }
+                })
+            }
+        })
     }
 
     function applyComment() {
@@ -93,7 +113,7 @@
                                     <input type="text" class="form-control" id="CommentCon" placeholder="请输入你的评论内容">
                                 </div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-sm btn-primary" onclick="">评论</button>
+                                    <button class="btn btn-sm btn-primary" id="addCommentBtn">评论</button>
                                 </div>
                             </div>
                             <%--<div class="row" id="applyContent" style="display:none">

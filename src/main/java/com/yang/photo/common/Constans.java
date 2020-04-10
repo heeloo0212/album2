@@ -21,4 +21,14 @@ public class Constans {
      * 验证成功
      * */
     public static final String SUCCESS_MES_VALIDA = "验证成功";
+
+    /**
+     * 评论的对象是发动态的用户
+     * */
+    public static final String BE_COMMENTOR_IS_ACTIVER = "1";
+
+    /**
+     * 评论的对象不是发动态的用户
+     * */
+    public static final String BE_COMMENTOR_NOT_ACTIVER = "0";
 }

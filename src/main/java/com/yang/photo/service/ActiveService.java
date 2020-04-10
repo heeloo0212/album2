@@ -8,4 +8,5 @@ import java.util.List;
 public interface ActiveService {
     List<Active> getActiveList();
     int addActive(Active active,List<ShowPhoto> showPhotoList);
+    Active getActiveById(int id);
 }

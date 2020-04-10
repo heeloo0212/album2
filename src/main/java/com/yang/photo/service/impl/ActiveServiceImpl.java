@@ -54,4 +54,8 @@ public class ActiveServiceImpl implements ActiveService {
         showPhotoService.batchAddShowPhoto(showPhotoList);
         return result;
     }
+
+    @Override public Active getActiveById(int id) {
+        return activeDao.getActiveById(id);
+    }
 }

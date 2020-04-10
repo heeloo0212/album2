@@ -9,4 +9,5 @@ import java.util.List;
 public interface ActiveDao {
     List<Active> getActiveList();
     int addActive(Active active);
+    Active getActiveById(int id);
 }

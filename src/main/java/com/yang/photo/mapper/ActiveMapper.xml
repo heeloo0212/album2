@@ -31,4 +31,10 @@
 
     </insert>
 
+    <select id="getActiveById" resultMap="activeResultMap" parameterType="java.lang.Integer">
+
+        select * from active where id = #{id}
+
+    </select>
+
 </mapper>
