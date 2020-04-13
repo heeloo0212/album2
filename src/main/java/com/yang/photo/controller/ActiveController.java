@@ -29,9 +29,11 @@ public class ActiveController {
 
     @RequestMapping("/toShowAllPhotos")
     public String toShowAllPhotos(Model model, HttpSession session){
+        User user = SessionCommon.getUserSession(session);
         List<Active> activeList = activeService.getActiveList();
         if(activeList != null) {
             model.addAttribute("activeList", activeList);
+            model.addAttribute("user",user);
         }
         return  "showAllPhotos";
     }
@@ -47,15 +49,16 @@ public class ActiveController {
         comment1.setContent(comment.getContent());
         comment1.setCommentor(user.getName());
         comment1.setCommentTime(new Date());
-        Active active = activeService.getActiveById(comment.getActiveId());
-        if(active.getUserName().equals(comment.getBeCommentor())){
-            comment1.setStatus(Constans.BE_COMMENTOR_IS_ACTIVER);
+        /*Active active = activeService.getActiveById(comment.getActiveId());*/
+        if(comment.getBeCommentor().equals("null")){
+            comment1.setStatus(Constans.COMMENT);
         }else{
-            comment1.setStatus(Constans.BE_COMMENTOR_NOT_ACTIVER);
+            comment1.setStatus(Constans.APPLY);
         }
         int result = commentDao.addComment(comment1);
         if(result > 0){
             responseResult.setStatus(1);
+            responseResult.setData(comment1);
         }else{
             responseResult.setStatus(0);
         }

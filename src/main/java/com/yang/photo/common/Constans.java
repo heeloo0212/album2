@@ -23,12 +23,12 @@ public class Constans {
     public static final String SUCCESS_MES_VALIDA = "验证成功";
 
     /**
-     * 评论的对象是发动态的用户
+     * 评论
      * */
-    public static final String BE_COMMENTOR_IS_ACTIVER = "1";
+    public static final String COMMENT = "1";
 
     /**
-     * 评论的对象不是发动态的用户
+     * 回复
      * */
-    public static final String BE_COMMENTOR_NOT_ACTIVER = "0";
+    public static final String APPLY = "0";
 }

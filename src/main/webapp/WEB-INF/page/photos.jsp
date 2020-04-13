@@ -20,12 +20,24 @@
     <title>个人相册主页</title>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="$../layer/layer.js"></script>
+    <script src="../layer/layer.js"></script>
+    <script src="../js/viewer.min.js"></script>
     <script src="${pageContext.request.contextPath}/layer/layer.js"></script>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/mainCss.css">
     <link href="../css/signin.css" rel="stylesheet" type="text/css">
+    <link href="../css/viewer.min.css" rel="stylesheet">
 </head>
+<style>
+    li{
+        list-style-type: none;
+    }
+    * { margin: 0; padding: 0;}
+    #jqhtml { width: 700px; margin: 0 auto; font-size: 0;}
+    #jqhtml li { display: inline-block; width: 32%; margin-left: 1%; padding-top: 1%;}
+    #jqhtml li img { width: 100%;}
+</style>
+
 <script>
 
     //显示确认删除的提示
@@ -67,7 +79,6 @@
     <div class="col-mid-12" style="text-align: center"><h1>个人相册</h1></div>
 </div>
 
-
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
 
@@ -85,15 +96,17 @@
 </nav>
 <div class="container">
     <div class="row">
-        <c:forEach items="${photoList}" var="photo">
-        <div class="col-md-3">
-            <img src="${pageContext.request.contextPath}/${photo.image}" class="imageSize img-thumbnail">
-            <div class="checkbox">
-                <label><input type="checkbox" class=""></label>
-                <button onclick="showDeleteModal(${photo.id})" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
+        <ul id="images">
+            <c:forEach items="${photoList}" var="photo">
+            <div class="col-md-3">
+                <li><img src="${pageContext.request.contextPath}/${photo.image}" class="imageSize img-thumbnail"></li>
+                <div class="checkbox">
+                    <label><input type="checkbox" class=""></label>
+                    <button onclick="showDeleteModal(${photo.id})" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
+                </div>
             </div>
-        </div>
-        </c:forEach>
+            </c:forEach>
+        </ul>
     </div>
 </div>
 
@@ -122,4 +135,7 @@
 <!-- 确认删除 end -->
 
 </body>
+<script>
+    var viewer = new Viewer(document.getElementById('images'));
+</script>
 </html>
