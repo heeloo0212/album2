@@ -93,7 +93,7 @@
 <div class="container">
     <div id="main">
         <div id="list">
-            <ul id="photos">
+            <ul>
                 <c:forEach items="${activeList}" var="active">
                 <li>
                     <div class="po-avt-wrap">
