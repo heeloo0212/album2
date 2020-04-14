@@ -98,6 +98,30 @@ public class UserController {
         return responseResult;
     }
 
+    @RequestMapping("/modifyUserPassword")
+    @ResponseBody
+    public ResponseResult modifyUserPassword(String oldPassword,String newPassword1,String newPassword2,HttpSession session){
+        ResponseResult responseResult = new ResponseResult();
+        User user = new User();
+        User user1 = SessionCommon.getUserSession(session);
+        int result = 0;
+        if(oldPassword.equals(user1.getPassword())){
+            if(newPassword1.equals(newPassword2)){
+                user.setId(user1.getId());
+                user.setPassword(newPassword1);
+                result = userService.modifyUser(user);
+            }
+        }
+        if(result > 0){
+            responseResult.setStatus(1);
+            responseResult.setMessage("修改密码成功，请重新登录");
+        }else{
+            responseResult.setStatus(0);
+            responseResult.setMessage("修改密码失败");
+        }
+        return responseResult;
+    }
+
     @RequestMapping("/toFriends")
     public String toFriends(){
         return "friends";
