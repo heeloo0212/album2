@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -100,17 +101,17 @@ public class UserController {
 
     @RequestMapping("/modifyUserPassword")
     @ResponseBody
-    public ResponseResult modifyUserPassword(String oldPassword,String newPassword1,String newPassword2,HttpSession session){
+    public ResponseResult modifyUserPassword(String oldPassword,String newPassword,HttpSession session){
         ResponseResult responseResult = new ResponseResult();
         User user = new User();
         User user1 = SessionCommon.getUserSession(session);
+        User user2 = new User();
+        user2.setPassword(oldPassword);
         int result = 0;
-        if(oldPassword.equals(user1.getPassword())){
-            if(newPassword1.equals(newPassword2)){
-                user.setId(user1.getId());
-                user.setPassword(newPassword1);
-                result = userService.modifyUser(user);
-            }
+        if(userService.getUser(user2) != null) {
+            user.setId(user1.getId());
+            user.setPassword(newPassword);
+            result = userService.modifyUser(user);
         }
         if(result > 0){
             responseResult.setStatus(1);
@@ -120,6 +121,22 @@ public class UserController {
             responseResult.setMessage("修改密码失败");
         }
         return responseResult;
+    }
+
+    @RequestMapping("/checkName")
+    @ResponseBody
+    public Map<String,Object> checkName(String name){
+        Map<String,Object> map = new HashMap<>();
+        User user1 = new User();
+        user1.setName(name);
+        User user = userService.getUser(user1);
+        if(user == null){
+            map.put("valid",true);
+        }else{
+            map.put("valid",false);
+            map.put("message", "用户（" + name + "）已存在");
+        }
+        return map;
     }
 
     @RequestMapping("/toFriends")

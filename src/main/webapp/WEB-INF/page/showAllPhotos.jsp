@@ -37,8 +37,8 @@
         $('#addComment'+activeId).toggle();
         $('#addCommentBtn'+activeId).click(function () {
             var content = $('#CommentCon'+activeId).val();
-            var appendContent = "<p>" + "<span>" + commentor + ":</span>" + content + "</p>";
-            var applyContent = "<p><span>" + commentor + "</span>回复<span>" + beCommentor + ":</span>" + content + "</p>";
+            var appendContent = "<p>" + "<span>" + commentor + ": </span>" + content + "</p>";
+            var applyContent = "<p><span>" + commentor + "</span>回复<span>" + beCommentor + ": </span>" + content + "</p>";
             if(content != null && content != ''){
                 $.ajax({
                     url:'${pageContext.request.contextPath}/addComment',
@@ -92,7 +92,7 @@
 </nav>
 <div class="container">
     <div id="main">
-        <div id="list">
+        <div>
             <ul>
                 <c:forEach items="${activeList}" var="active">
                 <li>
@@ -153,7 +153,7 @@
     </div>
 </div>
 <script>
-    var viewer = new Viewer(document.getElementById('photos'));
+    /*var viewer = new Viewer(document.getElementById('photos'));*/
 </script>
 </body>
 </html>
