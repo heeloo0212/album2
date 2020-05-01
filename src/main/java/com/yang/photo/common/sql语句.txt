@@ -1,0 +1,102 @@
+DROP TABLE IF EXISTS user
+CREATE TABLE user
+(
+  id INT(11) PRIMARY KEY NOT NULL,
+  name VARCHAR(20),
+  password varchar(20),
+  sex VARCHAR(2),
+  age int(3),
+  email VARCHAR(20)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS photo
+CREATE TABLE photo
+(
+  id INT(11) PRIMARY KEY NOT NULL,
+  image VARCHAR(100),
+  gid int(11),
+  style VARCHAR(50),
+  create_time datetime
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS photograph
+CREATE TABLE photograph
+(
+  id INT(11) PRIMARY KEY NOT NULL,
+  name VARCHAR(20),
+  description varchar(100),
+  type VARCHAR(20),
+  permission varchar(20),
+  click int(10),
+  create_time datetime,
+  image varchar(100),
+  user_id int(11),
+  update_time datetime
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS COMMENT;
+CREATE TABLE COMMENT
+(
+  id INT(10) PRIMARY KEY NOT NULL,
+  content VARCHAR(100),
+  active_id int(11),
+  STATUS VARCHAR(2),
+  commentor VARCHAR(20),
+  be_commentor VARCHAR(20),
+  comment_time DATETIME   
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
+
+DROP TABLE IF EXISTS show_photo;
+CREATE TABLE show_photo
+(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  image VARCHAR(100),
+  active_id INT,
+  photo_id INT
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS active;
+CREATE TABLE active
+(
+   id INT PRIMARY KEY AUTO_INCREMENT,
+   graph_id INT,
+   graph_name VARCHAR(20),
+   user_name VARCHAR(20),
+   info VARCHAR(200),
+   click INT,
+   create_time DATETIME
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+drop table if exists relation;
+create table relation
+(
+  id int primary key auto_increment,
+  user_id int,
+  friend_id int,
+  friend_group vharchar(20),
+  talk_room varchar(50),
+  status varchar(2)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+drop valida_mes if exists valida_mes;
+create table valida_mes
+(
+  id int primary key auto_increment,
+  mes varchar(10),
+  v_user_id int,
+  v_friend_id int,
+  v_status varchar(5)
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+drop table if exists message;
+create table message
+(
+  id int primary key auto_increment,
+  talker varchar(20),
+  content varchar(500),
+  talk_room varchar(50),
+  create_time datetime
+)ENGINE=INNODB DEFAULT CHARSET=utf8;
