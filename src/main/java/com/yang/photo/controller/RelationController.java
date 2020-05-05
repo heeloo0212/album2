@@ -1,5 +1,6 @@
 package com.yang.photo.controller;
 
+import com.github.pagehelper.util.StringUtil;
 import com.yang.photo.common.Constans;
 import com.yang.photo.pojo.*;
 import com.yang.photo.service.MessageService;
@@ -8,6 +9,7 @@ import com.yang.photo.service.ValidaMesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -166,14 +168,20 @@ public class RelationController {
         ResponseResult responseResult = new ResponseResult();
         User user = SessionCommon.getUserSession(session);
 
-        Message message = new Message();
-        message.setTalker(user.getName());
-        message.setContent(content);
-        message.setTalkRoom(talkRoom);
-        message.setCreateTime(new Date());
-        int result = messageService.addMessage(message);
-        if(result > 1){
-            responseResult.setData(message);
+        if(content != "" && StringUtil.isNotEmpty(content)) {
+            Message message = new Message();
+            message.setTalker(user.getName());
+            message.setContent(content);
+            message.setTalkRoom(talkRoom);
+            message.setCreateTime(new Date());
+            int result = messageService.addMessage(message);
+            if (result > 0) {
+                responseResult.setStatus(1);
+                responseResult.setData(message);
+            }
+        }else{
+            responseResult.setStatus(0);
+            responseResult.setMessage("不能输入空字符串");
         }
         return responseResult;
     }

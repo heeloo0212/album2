@@ -69,11 +69,11 @@ public class PhotoController {
                 String ext = FilenameUtils.getExtension(mf
                         .getOriginalFilename());
                 // 设置图片上传路径
-                String uploadFilePath = session.getServletContext().getRealPath("/WEB-INF/upload/"+user.getName());
+                String uploadFilePath = session.getServletContext().getRealPath("\\WEB-INF\\upload\\"+user.getName());
                 // 以绝对路径保存重名命后的图片
-                mf.transferTo(new File(uploadFilePath + "/" + name + "." + ext));
+                mf.transferTo(new File(uploadFilePath + "\\" + name + "." + ext));
                 // 把图片存储路径保存到数据库
-                String path = "upload/" + user.getName() + "/" + name + "." + ext;
+                String path = "upload\\" + user.getName() + "\\" + name + "." + ext;
                 photo1.setImage(path);
                 photo1.setGid(gid);
                 photo1.setCreateTime(new Date());

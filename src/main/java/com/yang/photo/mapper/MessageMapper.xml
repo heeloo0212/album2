@@ -26,10 +26,10 @@
         select * from message
         <where>
             <if test="talker != null and talker != ''">talker = #{talker}</if>
-            <if test="talkRoom != null and talkRoom != ''">talkRoom = #{talkRoom}</if>
+            <if test="talkRoom != null and talkRoom != ''">talk_room = #{talkRoom}</if>
             <if test="createTime != null and createTime != ''">create_time = #{createTime}</if>
         </where>
-        order by create_time asc
+        order by create_time DESC
 
     </select>
 

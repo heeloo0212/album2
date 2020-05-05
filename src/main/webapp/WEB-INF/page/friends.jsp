@@ -1,3 +1,4 @@
+<%@ page import="com.yang.photo.pojo.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -304,27 +305,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                <%--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
-                </button>
+                </button>--%>
                 <h4 class="modal-title" id="">
                     留言框
                 </h4>
             </div>
             <div class="modal-body" style="text-align: center">
                 <div id="messageBody" style="border: #26337e inset 2px">
-                    <div id="getMessage" style="width: 566px;height: 300px;border: #2dc462 inset 1px">
-                        <ul class="left">
-                            <li style="list-style-type: none">
-                                <label class="control-label"> 老王： 很高兴见到你</label>
-                            </li>
-                        </ul>
-                        <br>
-                        <ul class="right">
-                            <li style="list-style-type: none">
-                                <label class="control-label">我也是：小杨</label>
-                            </li>
-                        </ul>
+                    <div id="getMessage" style="width: 566px;height: 300px;">
 
                     </div>
                     <div style="width: 564px;height: 30px; background: #bce8f1"></div>
@@ -333,14 +323,15 @@
                             <textarea class="form-control" cols="" rows="1" id="sendMes" placeholder="请输入留言内容"></textarea>
                         </div>
                         <div class="col-md-2" style="text-align: center">
-                            <button class="btn btn-primary" onclick="" style="position:relative;float: right">发送</button>
+                            <button class="btn btn-primary" onclick="sendMessage()" style="position:relative;float: right">发送</button>
                         </div>
                     </div>
                     <br>
                 </div>
             </div>
+            <input type="hidden" id="saveTalkRoom">
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                <button type="button" onclick="clearMes()" id="closeMes" class="btn btn-default" >关闭
                 </button>
             </div>
         </div><!-- /.modal-content -->
@@ -348,18 +339,96 @@
 </div>
 <script>
     function showMessageModal(talkRoom) {
-        console.log(talkRoom);
         $('#messageModel').modal('show');
-        /*$.ajax({
+        $('#saveTalkRoom').val(talkRoom);
+        $.ajax({
             url:'/getMessage',
             type:"post",
             data:{
                 'talkRoom':talkRoom,
             },
             success:function (result) {
-
+                var messageList = result.data;
+                var userName = '${loginUser.name}';
+                for(var i = 0;i<result.data.length;i++){
+                    var name = messageList[i].talker;
+                    var content = messageList[i].content;
+                    var time = getMyDate(messageList[i].createTime);
+                    if(name != userName) {
+                        $('#getMessage').prepend("<ul class=\"left\">\n" +
+                            "                            <li style=\"list-style-type: none\">\n" +
+                            "                                <label class=\"control-label\"> " + name + ": " + content + "   (" + time + ")" + "</label>\n" + "  " + /*time*/"" +
+                            "                            </li>\n" +
+                            "                        </ul>\n" +
+                            "                        <br>")
+                    }else {
+                        $('#getMessage').prepend("<ul class=\"right\">\n" +
+                            "                            <li style=\"list-style-type: none\">\n" +
+                            "                                <label class=\"control-label\"> " + "(" + time + ")   " + content + ": " + name + "</label>\n" + "  " + /*time*/"" +
+                            "                            </li>\n" +
+                            "                        </ul>\n" +
+                            "                        <br>")
+                    }
+                }
             }
-        })*/
+        })
+    }
+
+    function sendMessage() {
+        $.ajax({
+            url:'/addMessage',
+            type:'post',
+            data:{
+                'talkRoom':$('#saveTalkRoom').val(),
+                'content':$('#sendMes').val()
+            },
+            success:function (result){
+                console.log(result.status);
+                if(result.status > 0){
+                    var time = getMyDate(new Date().toDateString());
+                    var content = result.data.content;
+                    var name = result.data.talker;
+                    $('#getMessage').append("<ul class=\"right\">\n" +
+                        "                            <li style=\"list-style-type: none\">\n" +
+                        "                                <label class=\"control-label\"> " + "(" + time + ")   " + content + ": " + name + "</label>\n" + "  " + /*time*/"" +
+                        "                            </li>\n" +
+                        "                        </ul>\n" +
+                        "                        <br>");
+                    $('#sendMes').val("");
+                }else{
+                    $('#messageModel').append("<div id=\"myAlert2\" class=\"alert alert-warning\">\n" +
+                        "    <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>\n" +
+                        "    <strong>警告！</strong>输入的留言不能为空\n" +
+                        "</div>")
+                }
+            }
+        })
+    }
+
+    function clearMes() {
+        console.log("js傻逼")
+        $('#getMessage').empty();
+        $('#closeMes').attr('data-dismiss','modal');
+    }
+
+    //时间格式转换
+    function getMyDate(str){
+        var oDate = new Date(str),
+            oYear = oDate.getFullYear(),
+            oMonth = oDate.getMonth()+1,
+            oDay = oDate.getDate(),
+            oHour = oDate.getHours(),
+            oMin = oDate.getMinutes(),
+            oSen = oDate.getSeconds(),
+            oTime = oYear +'-'+ getzf(oMonth) +'-'+ getzf(oDay) +' '+ getzf(oHour) +':'+ getzf(oMin) +':'+getzf(oSen);//最后拼接时间
+        return oTime;
+    };
+    //补0操作
+    function getzf(num){
+        if(parseInt(num) < 10){
+            num = '0'+num;
+        }
+        return num;
     }
 </script>
 </body>

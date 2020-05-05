@@ -54,6 +54,15 @@
             }
         })
     })
+
+    $(function () {
+        // 刷新验证码
+        $("#verification").bind("click", function () {
+            $(this).hide().attr('src', '/verification?random=' + Math.random()).fadeIn();
+        });
+    });
+
+
 </script>
 <body>
 <div class="container">
@@ -64,6 +73,16 @@
         </div>
         <div class="form-group">
             <input type="password" id="password" name="password" class="form-control" placeholder="密码" >
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="code" name="code" data-toggle="tooltip" data-placement="top" required placeholder="请输入验证码">
+                </div>
+                <div class="col-sm-4">
+                    <img id="verification" src="/verification" class="img-responsive" style="display: block;width:100%;height: 32px" title="看不清？换一张" />
+                </div>
+            </div>
         </div>
         <div class="checkbox">
             <label>
