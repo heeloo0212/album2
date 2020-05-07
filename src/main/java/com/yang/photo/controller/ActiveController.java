@@ -50,7 +50,7 @@ public class ActiveController {
         comment1.setCommentor(user.getName());
         comment1.setCommentTime(new Date());
         /*Active active = activeService.getActiveById(comment.getActiveId());*/
-        if(comment.getBeCommentor().equals("null")){
+        if("null".equals(comment.getBeCommentor())){
             comment1.setStatus(Constans.COMMENT);
         }else{
             comment1.setStatus(Constans.APPLY);

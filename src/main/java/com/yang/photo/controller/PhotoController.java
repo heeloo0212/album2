@@ -70,6 +70,13 @@ public class PhotoController {
                         .getOriginalFilename());
                 // 设置图片上传路径
                 String uploadFilePath = session.getServletContext().getRealPath("\\WEB-INF\\upload\\"+user.getName());
+
+                //根据用户名创建文件夹
+                File file1 = new File(uploadFilePath);
+                if(!file1.exists()){
+                    file1.mkdir();
+                }
+
                 // 以绝对路径保存重名命后的图片
                 mf.transferTo(new File(uploadFilePath + "\\" + name + "." + ext));
                 // 把图片存储路径保存到数据库

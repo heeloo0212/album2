@@ -28,11 +28,11 @@
                         notEmpty: {
                             message: '用户名不能为空'
                         },
-                        stringLength: {
+                       /* stringLength: {
                             min: 3,
                             max: 20,
                             message: '用户名长度不能小于3位或超过20位'
-                        },
+                        },*/
                         remote:{
                             type:'post',
                             url:'${pageContext.request.contextPath}/checkName',
