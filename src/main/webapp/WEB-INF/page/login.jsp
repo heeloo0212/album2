@@ -64,8 +64,8 @@
 
 
 </script>
-<body>
-<div class="container">
+<body style="background: url(../images/loginback3.jpg) no-repeat;background-size: 100% 100%">
+<div class="container" >
     <form class="form-signin" action="/loginPage" method="post" id="formLogin">
         <h2 class="form-signin-heading">请登入您的账号</h2>
         <div class="form-group">
@@ -92,7 +92,7 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
     <button class="btn btn-lg btn-info btn-block" type="button"><a href="${pageContext.request.contextPath}/register">注册</a></button>
     </form>
-
-</div> <!-- /container -->
+    </div>
+</div>
 </body>
 </html>

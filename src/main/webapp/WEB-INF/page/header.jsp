@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<div class="row" style="height: 80px; background-color: #c1e2b3">
+<div class="row" style="height: 120px; background: url(../images/head2.jpg) no-repeat;background-size: 100% 100%">
     <div class="col-mid-12" style="text-align: center"><h1>个人相册</h1></div>
 </div>
 <nav class="navbar navbar-default" role="navigation">
