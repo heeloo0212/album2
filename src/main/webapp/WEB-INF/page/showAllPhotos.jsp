@@ -86,6 +86,7 @@
                     <div class="po-cmt">
                         <div class="po-hd">
                             <p class=""><span class="data-name po-name">${active.userName}</span>&nbsp;<span>上传图片到:《${active.graphName}》</span></p>
+                            <i class="c-icon glyphicon glyphicon-trash"></i>
                             <div class="post">
                                 <p>
                                     <c:forEach items="${active.showPhotoList}" var="photo">

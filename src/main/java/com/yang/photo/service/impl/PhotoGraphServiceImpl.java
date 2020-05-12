@@ -1,6 +1,8 @@
 package com.yang.photo.service.impl;
 
+import com.yang.photo.dao.PhotoDao;
 import com.yang.photo.dao.PhotoGraphDao;
+import com.yang.photo.pojo.Photo;
 import com.yang.photo.pojo.PhotoGraph;
 import com.yang.photo.service.PhotoGraphService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class PhotoGraphServiceImpl implements PhotoGraphService {
 
     @Autowired
     private PhotoGraphDao photoGraphDao;
+
+    @Autowired
+    private PhotoDao photoDao;
 
     @Override public List<PhotoGraph> getPhotoGraphByUserId(int id) {
         List<PhotoGraph> photoGraphList = photoGraphDao.getPhotoGraphByUserId(id);
@@ -43,7 +48,14 @@ public class PhotoGraphServiceImpl implements PhotoGraphService {
     }
 
     @Override public int deletePhotoGraphById(PhotoGraph photoGraph) {
-        return photoGraphDao.deletePhotoGraphById(photoGraph);
+        int result = deletePhotoGraphById(photoGraph);
+        //删除相册下的相片
+        if(result > 0){
+            Photo photo = new Photo();
+            photo.setGid(photoGraph.getId());
+            result += photoDao.deletePhoto(photo);
+        }
+        return result;
     }
 
 }

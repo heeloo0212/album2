@@ -31,4 +31,19 @@ public class Constans {
      * 回复
      * */
     public static final String APPLY = "0";
+
+    /**
+     * 所有人可见
+     * */
+    public static final String EVERYBODY = "everybody";
+
+    /**
+     * 仅自己可见
+     * */
+    public static final String ONESELF = "oneself";
+
+    /**
+     * 仅好友可见
+     * */
+    public static final String FRIEND = "friend";
 }

@@ -1,5 +1,6 @@
 package com.yang.photo.controller;
 
+import com.yang.photo.common.Constans;
 import com.yang.photo.pojo.*;
 import com.yang.photo.service.ActiveService;
 import com.yang.photo.service.PhotoGraphService;
@@ -86,21 +87,25 @@ public class PhotoController {
                 photo1.setCreateTime(new Date());
                 photos.add(photo1);
 
-                //将刚上传的图片存入到show_photo表中
-                showPhoto.setImage(path);
-                showPhotos.add(showPhoto);
+                if(Constans.EVERYBODY.equals(photoGraph.getPermission())) {
+                    //将刚上传的图片存入到show_photo表中
+                    showPhoto.setImage(path);
+                    showPhotos.add(showPhoto);
 
-                //添加一条刚上传图片的动态
-                active.setGraphId(gid);
-                active.setUserName(user.getName());
-                active.setGraphName(photoGraph.getName());
-                active.setCreateTime(new Date());
+                    //添加一条刚上传图片的动态
+                    active.setGraphId(gid);
+                    active.setUserName(user.getName());
+                    active.setGraphName(photoGraph.getName());
+                    active.setCreateTime(new Date());
+                }
             }
         }
         //插入多张图片
         photoService.batchAddPhoto(photos);
 
-        activeService.addActive(active,showPhotos);
+        if(Constans.EVERYBODY.equals(photoGraph.getPermission())) {
+            activeService.addActive(active, showPhotos);
+        }
 
         //将上传的第一张图片设置为相册的封面
         PhotoGraph photoGraph1 = new PhotoGraph();
