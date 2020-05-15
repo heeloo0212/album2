@@ -37,4 +37,10 @@
 
     </select>
 
+    <delete id="deleteActive" parameterType="int">
+
+        delete from active where id = #{id}
+
+    </delete>
+
 </mapper>

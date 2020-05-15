@@ -23,6 +23,16 @@
         </trim>
     </insert>
 
+    <delete id="deleteShowPhoto" parameterType="com.yang.photo.pojo.ShowPhoto">
+
+        delete from show_photo
+        <where>
+            <if test="id != null and id != ''">and id=#{id}</if>
+            <if test="activeId != null and activeId != ''">and active_id = #{activeId}</if>
+        </where>
+
+    </delete>
+
     <select id="getShowPhoto" resultMap="showPhotoResultMap" parameterType="com.yang.photo.pojo.ShowPhoto">
 
         select * from show_photo

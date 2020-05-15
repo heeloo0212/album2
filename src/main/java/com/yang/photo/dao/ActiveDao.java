@@ -10,4 +10,5 @@ public interface ActiveDao {
     List<Active> getActiveList();
     int addActive(Active active);
     Active getActiveById(int id);
+    int deleteActive(int id);
 }

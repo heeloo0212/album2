@@ -58,4 +58,16 @@ public class ActiveServiceImpl implements ActiveService {
     @Override public Active getActiveById(int id) {
         return activeDao.getActiveById(id);
     }
+
+    @Override public int deletActive(int id) {
+        Comment comment = new Comment();
+        ShowPhoto showPhoto = new ShowPhoto();
+        comment.setActiveId(id);
+        showPhoto.setActiveId(id);
+        int result = activeDao.deleteActive(id);
+        if(result > 0){
+            result += commentDao.deleteComment(comment) + showPhotoDao.deleteShowPhoto(showPhoto);
+        }
+        return result;
+    }
 }

@@ -28,4 +28,14 @@
 
     </select>
 
+    <delete id="deleteComment" parameterType="com.yang.photo.pojo.Comment">
+
+        delete from comment
+        <where>
+            <if test="id != null and id != ''">and id=#{id}</if>
+            <if test="activeId != null and activeId != ''">and active_id = #{activeId}</if>
+        </where>
+
+    </delete>
+
 </mapper>

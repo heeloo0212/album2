@@ -2,13 +2,14 @@ package com.yang.photo.service.impl;
 
 import com.yang.photo.dao.CommentDao;
 import com.yang.photo.pojo.Comment;
+import com.yang.photo.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CommentServiceImpl implements CommentDao {
+public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private CommentDao commentDao;

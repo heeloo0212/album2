@@ -64,4 +64,22 @@ public class ActiveController {
         }
         return responseResult;
     }
+
+    @RequestMapping("/deleteActive")
+    @ResponseBody
+    public ResponseResult deleteActive(int id){
+        ResponseResult responseResult = new ResponseResult();
+        int result = 0;
+        if(id != 0){
+            result = activeService.deletActive(id);
+        }
+        if(result > 2){
+            responseResult.setStatus(1);
+            responseResult.setMessage("删除成功");
+        }else{
+            responseResult.setStatus(0);
+            responseResult.setMessage("删除失败");
+        }
+        return responseResult;
+    }
 }

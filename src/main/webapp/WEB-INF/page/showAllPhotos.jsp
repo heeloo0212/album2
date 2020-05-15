@@ -16,7 +16,10 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="css/app.css">
     <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.js"></script>
     <script src="../js/viewer.min.js"></script>
+    <script src="${pageContext.request.contextPath}/layer/layer.js"></script>
+    <link href="../css/signin.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="../css/viewer.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
@@ -67,6 +70,38 @@
         })
     }
 
+    //显示确认删除的提示
+    function showDeleteModal(id){
+        //将id值赋值给div的隐藏域组件
+        $('#deleteActiveId').val(id);
+        $('#deleteActiveModal').modal('show');
+    }
+
+    function deleteActive() {
+        $.ajax({
+            url:'${pageContext.request.contextPath}/deleteActive',
+            type:'post',
+            postType:'json',
+            data:{'id':$('#deleteActiveId').val()},
+            success:function(result){
+                if(result.status==1){
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'successMsg'
+                    },function(){
+                        //重新加载数据
+                        location.href='${pageContext.request.contextPath}/toShowAllPhotos';
+                    })
+                }else{
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'errorsMsg'
+                    })
+                }
+            }
+        })
+    }
+
     function applyComment() {
         $('#applyContent').toggle();
     }
@@ -86,7 +121,7 @@
                     <div class="po-cmt">
                         <div class="po-hd">
                             <p class=""><span class="data-name po-name">${active.userName}</span>&nbsp;<span>上传图片到:《${active.graphName}》</span></p>
-                            <i class="c-icon glyphicon glyphicon-trash"></i>
+                            <c:if test="${active.userName.equals(user.name)}"><i onclick="showDeleteModal(${active.id})" class="c-icon glyphicon glyphicon-trash"></i></c:if>
                             <div class="post">
                                 <p>
                                     <c:forEach items="${active.showPhotoList}" var="photo">
@@ -120,14 +155,6 @@
                                     <button class="btn btn-sm btn-primary" id="addCommentBtn${active.id}">评论</button>
                                 </div>
                             </div>
-                            <%--<div class="row" id="applyContent" style="display:none">
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="applyCommentCon" placeholder="回复他">
-                                </div>
-                                <div class="col-sm-2">
-                                    <button class="btn btn-sm btn-primary" onclick="">评论</button>
-                                </div>
-                            </div>--%>
                         </div>
                     </div>
 
@@ -137,6 +164,30 @@
         </div>
     </div>
 </div>
+
+<!-- 确认删除 start -->
+<div class="modal fade" tabindex="-1" id="deleteActiveModal">
+    <!-- 窗口声明 -->
+    <div class="modal-dialog">
+        <!-- 内容声明 -->
+        <div class="modal-content">
+            <!-- 头部、主体、脚注 -->
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">提示消息</h4>
+            </div>
+            <div class="modal-body text-center">
+                <h4>确认要删除这条动态吗？</h4>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="deleteActiveId">
+                <button class="btn btn-primary" onclick="deleteActive()" data-dismiss="modal">删除</button>
+                <button class="btn btn-primary cancel" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 确认删除 end -->
 <script>
     /*var viewer = new Viewer(document.getElementById('photos'));*/
 </script>

@@ -9,4 +9,5 @@ import java.util.List;
 public interface ShowPhotoDao {
     int batchAddShowPhoto(List<ShowPhoto> showPhotoList);
     List<ShowPhoto> getShowPhoto(ShowPhoto showPhoto);
+    int deleteShowPhoto(ShowPhoto showPhoto);
 }
