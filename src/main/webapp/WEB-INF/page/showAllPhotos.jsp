@@ -123,10 +123,6 @@
         }
     }
 
-    function applyComment() {
-        $('#applyContent').toggle();
-    }
-
 </script>
 <body>
 <%@ include file="header.jsp" %>
