@@ -82,4 +82,24 @@ public class ActiveController {
         }
         return responseResult;
     }
+
+    @RequestMapping("addClick")
+    @ResponseBody
+    public ResponseResult addClick(int id){
+        ResponseResult responseResult = new ResponseResult();
+        int result = 0;
+        Active active = new Active();
+        if(id != 0){
+            active.setId(id);
+            result = activeService.updateActive(active);
+        }
+        Active active1 = activeService.getActiveById(id);
+        if(result > 0){
+            responseResult.setData(active1);
+            responseResult.setStatus(1);
+        }else{
+            responseResult.setStatus(0);
+        }
+        return responseResult;
+    }
 }

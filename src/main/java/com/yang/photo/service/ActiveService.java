@@ -10,4 +10,5 @@ public interface ActiveService {
     int addActive(Active active,List<ShowPhoto> showPhotoList);
     Active getActiveById(int id);
     int deletActive(int id);
+    int updateActive(Active active);
 }

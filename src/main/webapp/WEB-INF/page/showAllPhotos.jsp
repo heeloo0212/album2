@@ -102,6 +102,27 @@
         })
     }
 
+
+    function clickActive(id) {
+        var clickClass = $('#activeLike').attr('class');
+        console.log(clickClass);
+        if(clickClass == 'glyphicon glyphicon-heart-empty'){
+            $.ajax({
+                url:'${pageContext.request.contextPath}/addClick',
+                type:'post',
+                postType:'json',
+                data:{'id':id},
+                success:function(result){
+                    if(result.status==1){
+                        console.log(result.data.click)
+                        $('#clickNum').html(result.data.click);
+                        $('#activeLike').attr('class',"glyphicon glyphicon-heart");
+                    }
+                }
+            })
+        }
+    }
+
     function applyComment() {
         $('#applyContent').toggle();
     }
@@ -129,7 +150,9 @@
                                     </c:forEach>
                                 </p>
                             </div>
-                            <%--<p class="time">刚刚</p>--%><img class="c-icon" src="images/c.png" onclick="showAddComment(${active.id},'null')">
+                            <%--<p class="time">刚刚</p>--%>
+                            <i id="activeLike" class="glyphicon glyphicon-heart-empty" onclick="clickActive(${active.id})">&nbsp;</i><span id="clickNum">${active.click}</span>
+                            <img class="c-icon" src="images/c.png" onclick="showAddComment(${active.id},'null')">
                         </div>
                         <div class="r"></div>
                         <div class="cmt-wrap">

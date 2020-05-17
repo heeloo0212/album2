@@ -18,14 +18,14 @@
     <div class="container">
 
         <ul class="nav navbar-nav">
-            <li class="nav-item active"><a href="${pageContext.request.contextPath}/toMain" ><i class="glyphicon glyphicon-home"></i> 相册</a></li>
-            <li class="nav-item"><a href="${pageContext.request.contextPath}/toShowAllPhotos" ><i class="glyphicon glyphicon-picture"></i> 照片</a></li>
-            <li class="nav-item"><a href="#" ><i class="glyphicon glyphicon-facetime-video"></i> 视频</a></li>
+            <li class="nav-item active"><a href="${pageContext.request.contextPath}/toMain" ><span class="glyphicon glyphicon-home"></span> 相册</a></li>
+            <li class="nav-item"><a href="${pageContext.request.contextPath}/toShowAllPhotos" ><span class="glyphicon glyphicon-picture"></span> 照片</a></li>
+            <li class="nav-item"><a href="#" ><span class="glyphicon glyphicon-facetime-video"></span> 视频</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item"><a href="#"><i class="glyphicon glyphicon-th-large"></i> 应用</a></li>
-            <li class="nav-item"><a href="${pageContext.request.contextPath}/getAllFriend"><i class="glyphicon glyphicon-user"></i> 好友列表</a></li>
-            <li class="nav-item"><a href="${pageContext.request.contextPath}/toPersonInfo"><i class="glyphicon glyphicon-edit"></i> 个人资料</a></li>
+            <li class="nav-item"><a href="#"><span class="glyphicon glyphicon-th-large"></span> 应用</a></li>
+            <li class="nav-item"><a href="${pageContext.request.contextPath}/getAllFriend"><span class="glyphicon glyphicon-user"></span> 好友列表</a></li>
+            <li class="nav-item"><a href="${pageContext.request.contextPath}/toPersonInfo"><span class="glyphicon glyphicon-edit"></span> 个人资料</a></li>
         </ul>
     </div>
 </nav>

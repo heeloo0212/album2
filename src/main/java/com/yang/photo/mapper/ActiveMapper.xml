@@ -43,4 +43,12 @@
 
     </delete>
 
+    <update id="updateActive" parameterType="com.yang.photo.pojo.Active">
+
+        update active
+        set click = click+1
+        where id = #{id}
+
+    </update>
+
 </mapper>

@@ -11,4 +11,5 @@ public interface ActiveDao {
     int addActive(Active active);
     Active getActiveById(int id);
     int deleteActive(int id);
+    int updateActive(Active active);
 }

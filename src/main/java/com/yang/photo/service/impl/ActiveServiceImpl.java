@@ -70,4 +70,9 @@ public class ActiveServiceImpl implements ActiveService {
         }
         return result;
     }
+
+    @Override
+    public int updateActive(Active active) {
+        return activeDao.updateActive(active);
+    }
 }
