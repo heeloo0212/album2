@@ -93,15 +93,15 @@ public class RelationController {
                 validaMes.setStatus(Constans.WAITING_VALIDATION);
                 result += validaMesService.addValidaMes(validaMes);
             }
-            //同时添加一个聊天室
+            /*//同时添加一个聊天室
             Message message = new Message();
             message.setTalkRoom(uuid);
             message.setCreateTime(new Date());
             result += messageService.addMessage(message);
 
-            System.out.println(result);
+            System.out.println(result);*/
         }
-        if(result > 2){
+        if(result > 1){
             responseResult.setStatus(1);
             responseResult.setMessage("添加成功,等待对方验证");
         }else{

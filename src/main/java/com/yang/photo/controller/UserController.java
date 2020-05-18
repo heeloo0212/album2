@@ -181,6 +181,11 @@ public class UserController {
         return null;
     }
 
+    @RequestMapping("/deleteSession")
+    public String deleteSession(HttpSession session){
+        session.removeAttribute("loginUser");
+        return "login";
+    }
 
     @RequestMapping("/toFriends")
     public String toFriends(){

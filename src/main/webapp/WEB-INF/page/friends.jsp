@@ -21,16 +21,6 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
 </head>
 <script>
-    /*function getFriends(friendGroup) {
-        /!*var friendGroup = 'friend';*!/
-        console.log(friendGroup);
-        $.ajax({
-            url:'/getAllFriend',
-            type:'post',
-            dataType:'json',
-            data:{'friendGroup':friendGroup}
-        })
-    }*/
 
     //显示确认删除的提示
     function showDeleteModal(id){
@@ -292,11 +282,12 @@
                 <%--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     &times;
                 </button>--%>
+                <span class="close glyphicon glyphicon-refresh" onclick="refreshMes()"></span>
                 <h4 class="modal-title" id="">
                     留言框
                 </h4>
             </div>
-            <div class="modal-body" style="text-align: center">
+            <div class="modal-body">
                 <div id="messageBody" style="border: #26337e inset 2px">
                     <div id="getMessage" style="width: 566px;height: 300px;">
 
@@ -339,14 +330,49 @@
                     var content = messageList[i].content;
                     var time = getMyDate(messageList[i].createTime);
                     if(name != userName) {
-                        $('#getMessage').prepend("<ul class=\"left\">\n" +
+                        $('#getMessage').prepend("<br> <ul class=\"left\">\n" +
                             "                            <li style=\"list-style-type: none\">\n" +
                             "                                <label class=\"control-label\"> " + name + ": " + content + "   (" + time + ")" + "</label>\n" + "  " + /*time*/"" +
                             "                            </li>\n" +
                             "                        </ul>\n" +
                             "                        <br>")
                     }else {
-                        $('#getMessage').prepend("<ul class=\"right\">\n" +
+                        $('#getMessage').prepend("<br> <ul class=\"right\">\n" +
+                            "                            <li style=\"list-style-type: none\">\n" +
+                            "                                <label class=\"control-label\"> " + "(" + time + ")   " + content + ": " + name + "</label>\n" + "  " + /*time*/"" +
+                            "                            </li>\n" +
+                            "                        </ul>\n" +
+                            "                        <br>")
+                    }
+                }
+            }
+        })
+    }
+
+    function refreshMes() {
+        $.ajax({
+            url:'/getMessage',
+            type:"post",
+            data:{
+                'talkRoom':$('#saveTalkRoom').val(),
+            },
+            success:function (result) {
+                $('#getMessage').empty();
+                var messageList = result.data;
+                var userName = '${loginUser.name}';
+                for(var i = 0;i<result.data.length;i++){
+                    var name = messageList[i].talker;
+                    var content = messageList[i].content;
+                    var time = getMyDate(messageList[i].createTime);
+                    if(name != userName) {
+                        $('#getMessage').prepend("<br> <ul class=\"left\">\n" +
+                            "                            <li style=\"list-style-type: none\">\n" +
+                            "                                <label class=\"control-label\"> " + name + ": " + content + "   (" + time + ")" + "</label>\n" + "  " + /*time*/"" +
+                            "                            </li>\n" +
+                            "                        </ul>\n" +
+                            "                        <br>")
+                    }else {
+                        $('#getMessage').prepend("<br> <ul class=\"right\">\n" +
                             "                            <li style=\"list-style-type: none\">\n" +
                             "                                <label class=\"control-label\"> " + "(" + time + ")   " + content + ": " + name + "</label>\n" + "  " + /*time*/"" +
                             "                            </li>\n" +
@@ -372,7 +398,7 @@
                     var time = getMyDate(new Date().toDateString());
                     var content = result.data.content;
                     var name = result.data.talker;
-                    $('#getMessage').append("<ul class=\"right\">\n" +
+                    $('#getMessage').append("<br> <ul class=\"right\">\n" +
                         "                            <li style=\"list-style-type: none\">\n" +
                         "                                <label class=\"control-label\"> " + "(" + time + ")   " + content + ": " + name + "</label>\n" + "  " + /*time*/"" +
                         "                            </li>\n" +
@@ -390,7 +416,6 @@
     }
 
     function clearMes() {
-        console.log("js傻逼")
         $('#getMessage').empty();
         $('#closeMes').attr('data-dismiss','modal');
     }
