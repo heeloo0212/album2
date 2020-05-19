@@ -125,6 +125,30 @@
         })
     }
 
+    function deleteValidaMes(id) {
+        $.ajax({
+            url:'${pageContext.request.contextPath}/deleteVal',
+            type:'post',
+            postType:'json',
+            data:{'id':id},
+            success:function(result){
+                if(result.status==1){
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'successMsg'
+                    },function(){
+                        //重新加载数据
+                        location.href='${pageContext.request.contextPath}/getAllFriend';
+                    })
+                }else{
+                    layer.msg(result.message,{
+                        time:2000,
+                        skin:'errorsMsg'
+                    })
+                }
+            }
+        })
+    }
 
 
 </script>
@@ -149,7 +173,9 @@
                             <c:if test="${validaMes.user.sex=='男'}"><img src="${pageContext.request.contextPath}/iconfont/性别男.svg" style="width: 2px;height: 2px"></c:if>
                             <c:if test="${validaMes.user.sex=='女'}"><img src="${pageContext.request.contextPath}/iconfont/性别女.svg" style="width: 2px;height: 2px"></c:if>
                             <%--</label>--%>
-                            <button class="btn btn-sm btn-success" onclick="ModifyValidaMes(${validaMes.userId},${validaMes.friendId})" style="float: right">添加</button><br>
+                            <button class="btn btn-sm btn-danger" onclick="deleteValidaMes(${validaMes.id})" style="float: right">删除</button>&nbsp;&nbsp;
+                            <button class="btn btn-sm btn-success" onclick="ModifyValidaMes(${validaMes.userId},${validaMes.friendId})" style="float: right">添加</button>
+                            <br>
                         </c:forEach>
                     </p>
                 </li>
@@ -158,7 +184,7 @@
                     <i></i>
                     <label class="control-label" id="friend" value="friend">朋友</label>
                     <p>
-                        <c:forEach items="${relationList}" var="relation">
+                        <c:forEach items="${friendRelations}" var="relation">
                             <c:forEach items="${relation.userList}" var="userFriend">
                                 <label class="glyphicon glyphicon-user" id="userFriendName">&nbsp;${userFriend.name}</label>
                                 <span class="glyphicon glyphicon-trash" onclick="showDeleteModal(${relation.friendId})" style="float: right"></span>&nbsp;
@@ -172,11 +198,11 @@
                     <i></i>
                     <label class="control-label" id="classmate" value="classmate">同学</label>
                     <p>
-                        <c:forEach items="${relationList}" var="relation">
+                        <c:forEach items="${classmateRelations}" var="relation">
                             <c:forEach items="${relation.userList}" var="userFriend">
                                 <label class="glyphicon glyphicon-user">&nbsp;${userFriend.name}</label>
-                                <span class="glyphicon glyphicon-trash" style="float: right"></span>&nbsp;
-                                <span class="glyphicon glyphicon-comment" onclick="" style="float: right"></span><br>
+                                <span class="glyphicon glyphicon-trash" onclick="showDeleteModal(${relation.friendId})" style="float: right"></span>&nbsp;
+                                <span class="glyphicon glyphicon-comment" onclick="showMessageModal('${relation.talkRoom}')" style="float: right"></span><br>
                             </c:forEach>
                         </c:forEach>
                     </p>
@@ -184,13 +210,13 @@
                 <li>
                     <input <%--onclick="getFriends('family')"--%> type="checkbox" checked>
                     <i></i>
-                    <label class="control-label" id="family" id="family">家人</label>
+                    <label class="control-label" id="family" name="family">家人</label>
                     <p>
-                        <c:forEach items="${relationList}" var="relation">
+                        <c:forEach items="${familyRelations}" var="relation">
                             <c:forEach items="${relation.userList}" var="userFriend">
                                 <label class="glyphicon glyphicon-user">&nbsp;${userFriend.name}</label>
-                                <span class="glyphicon glyphicon-trash" style="float: right"></span>&nbsp;
-                                <span class="glyphicon glyphicon-comment" onclick="" style="float: right"></span><br>
+                                <span class="glyphicon glyphicon-trash" onclick="showDeleteModal(${relation.friendId})" style="float: right"></span>&nbsp;
+                                <span class="glyphicon glyphicon-comment" onclick="showMessageModal('${relation.talkRoom}')" style="float: right"></span><br>
                             </c:forEach>
                         </c:forEach>
                     </p>

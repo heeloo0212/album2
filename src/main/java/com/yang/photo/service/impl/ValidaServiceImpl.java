@@ -45,4 +45,8 @@ public class ValidaServiceImpl implements ValidaMesService {
         validaMes.setFriendId(friendId);
         return validaMesDao.getValidaMesByUIdAndFid(validaMes);
     }
+
+    @Override public int deleteVal(int id) {
+        return validaMesDao.deleteVal(id);
+    }
 }

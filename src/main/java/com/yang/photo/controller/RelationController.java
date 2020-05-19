@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -36,15 +37,29 @@ public class RelationController {
 
         //关联表
         Relation relation = new Relation();
-        /*relation.setFriendGroup(friendGroup);*/
         relation.setUserId(user.getId());
         List<Relation> relationList = relationService.getAllFriendByUserId(relation);
+        List<Relation> friendRelations = new ArrayList<>();
+        List<Relation> classmateRelations = new ArrayList<>();
+        List<Relation> familyRelations = new ArrayList<>();
+        for(Relation r : relationList){
+            if(r.getFriendGroup().equals("friend")){
+                friendRelations.add(r);
+            }else if (r.getFriendGroup().equals("classmate")){
+                classmateRelations.add(r);
+            }else if (r.getFriendGroup().equals("family")){
+                familyRelations.add(r);
+            }
+        }
 
         //验证表
         ValidaMes validaMes = new ValidaMes();
         validaMes.setUserId(user.getId());
         List<ValidaMes> validaMesList = validaMesService.getValidaMes(validaMes);
 
+        model.addAttribute("friendRelations",friendRelations);
+        model.addAttribute("classmateRelations",classmateRelations);
+        model.addAttribute("familyRelations",familyRelations);
         model.addAttribute("relationList",relationList);
         model.addAttribute("validaMesList",validaMesList);
         return "friends";
@@ -55,7 +70,6 @@ public class RelationController {
     public ResponseResult addFriend(String friendGroup,Integer id,HttpSession session){
         ResponseResult responseResult = new ResponseResult();
         int result = 0;
-        System.out.println(id);
         if(friendGroup != null && id != 0) {
             String uuid = UUID.randomUUID().toString().replaceAll("-","");
             User user = (User)session.getAttribute("loginUser");
@@ -93,13 +107,6 @@ public class RelationController {
                 validaMes.setStatus(Constans.WAITING_VALIDATION);
                 result += validaMesService.addValidaMes(validaMes);
             }
-            /*//同时添加一个聊天室
-            Message message = new Message();
-            message.setTalkRoom(uuid);
-            message.setCreateTime(new Date());
-            result += messageService.addMessage(message);
-
-            System.out.println(result);*/
         }
         if(result > 1){
             responseResult.setStatus(1);
@@ -195,6 +202,24 @@ public class RelationController {
         List<Message> messageList = messageService.getMessage(message);
         if(messageList != null){
             responseResult.setData(messageList);
+        }
+        return responseResult;
+    }
+
+    @RequestMapping("/deleteVal")
+    @ResponseBody
+    public ResponseResult deleteVal(int id){
+        ResponseResult responseResult = new ResponseResult();
+        int result = 0;
+        if(id != 0) {
+            result = validaMesService.deleteVal(id);
+        }
+        if(result > 0){
+            responseResult.setStatus(1);
+            responseResult.setMessage("成功删除验证");
+        }else{
+            responseResult.setStatus(0);
+            responseResult.setMessage("失败删除验证");
         }
         return responseResult;
     }

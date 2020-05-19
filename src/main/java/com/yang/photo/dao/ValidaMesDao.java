@@ -15,4 +15,6 @@ public interface ValidaMesDao {
     int updateValidaMes(ValidaMes validaMes);
 
     ValidaMes getValidaMesByUIdAndFid(ValidaMes validaMes);
+
+    int deleteVal(int id);
 }

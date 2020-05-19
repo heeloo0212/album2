@@ -45,4 +45,10 @@
 
     </select>
 
+    <delete id="deleteVal" parameterType="int">
+
+        delete from valida_mes where id = #{id}
+
+    </delete>
+
 </mapper>
