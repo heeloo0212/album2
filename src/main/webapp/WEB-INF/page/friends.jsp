@@ -180,7 +180,7 @@
                     </p>
                 </li>
                 <li>
-                    <input  <%--onclick="getFriends('friend')"--%> type="checkbox" checked>
+                    <input type="checkbox" checked>
                     <i></i>
                     <label class="control-label" id="friend" value="friend">朋友</label>
                     <p>
@@ -194,7 +194,7 @@
                     </p>
                 </li>
                 <li>
-                    <input <%--onclick="getFriends('classmate')"--%> type="checkbox" checked>
+                    <input type="checkbox" checked>
                     <i></i>
                     <label class="control-label" id="classmate" value="classmate">同学</label>
                     <p>
@@ -208,7 +208,7 @@
                     </p>
                 </li>
                 <li>
-                    <input <%--onclick="getFriends('family')"--%> type="checkbox" checked>
+                    <input type="checkbox" checked>
                     <i></i>
                     <label class="control-label" id="family" name="family">家人</label>
                     <p>

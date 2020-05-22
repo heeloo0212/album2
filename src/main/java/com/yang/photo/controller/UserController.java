@@ -5,13 +5,13 @@ import com.google.code.kaptcha.Producer;
 import com.yang.photo.pojo.ResponseResult;
 import com.yang.photo.pojo.User;
 import com.yang.photo.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.imageio.ImageIO;
@@ -39,12 +39,19 @@ public class UserController {
     }
 
     @PostMapping("/loginPage")
-    public String login(User user, HttpSession session,HttpServletRequest request){
+    public String login(User user, HttpSession session,@RequestParam(value="isRememberMe", defaultValue="0") Integer isRememberMe,HttpServletRequest request){
         if(user != null){
             User user1=userService.getUser(user);
             session.setAttribute("loginUser",user1);
             String captchaId = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
             String code = request.getParameter("code");
+            Subject subject = SecurityUtils.getSubject();
+
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getName(), user.getPassword().toCharArray());
+
+            if (isRememberMe == 1) {
+                token.setRememberMe(true);
+            }
             if(user1 != null && captchaId.equals(code)){
                 return "forward:toMain";
             }else{
