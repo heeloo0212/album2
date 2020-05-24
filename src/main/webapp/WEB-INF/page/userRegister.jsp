@@ -92,36 +92,41 @@
         })
     })
 </script>
-<body>
+<body style="background: url(../images/loginback3.jpg) no-repeat;background-size: 100% 100%">
 <div class="container">
-	<form class="form-signin" action="/addUser" method="post" id="formRegister">
-        <div class="form-group">
+	<form class="form-register" action="/addUser" method="post" id="formRegister">
+        <div class="col-md-12">
+            <h2 class="form-signin-heading">请注册您的账号</h2>
+        </div>
+        <div class="form-group col-md-12">
             <label class="control-label">账号名:</label>
             <input type="text" id="name" name="name" class="form-control" placeholder="账号名" />
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <label class="control-label">密码:</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="密码"/>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <label class="control-label">确认密码:</label>
             <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="确认密码"/>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <label class="control-label">邮箱:</label>
             <input type="text" id="email" name="email" class="form-control" placeholder="请输入你的邮箱"/>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <label class="control-label">年龄:</label>
             <input type="text" id="age" name="age" class="form-control" placeholder="请输入你的年龄"/>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <label class="control-label">性别:</label>
             <input type="radio" name="sex" value="男"/><label>男</label>
             <input type="radio" name="sex" value="女"/><label>女</label>
         </div>
+        <div class="col-md-12">
 		<button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
 		<button class="btn btn-lg btn-info btn-block" type="button"><a href="${pageContext.request.contextPath}/loginPage">已有账号</a></button>
+        </div>
 	</form>
 
 </div> <!-- /container -->

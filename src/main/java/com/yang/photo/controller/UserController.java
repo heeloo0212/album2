@@ -48,10 +48,16 @@ public class UserController {
             Subject subject = SecurityUtils.getSubject();
 
             UsernamePasswordToken token = new UsernamePasswordToken(user.getName(), user.getPassword().toCharArray());
-
             if (isRememberMe == 1) {
                 token.setRememberMe(true);
             }
+           /* try {
+                //3 让 shiro 框架进行登录验证：
+                subject.login(token);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "error";
+            }*/
             if(user1 != null && captchaId.equals(code)){
                 return "forward:toMain";
             }else{

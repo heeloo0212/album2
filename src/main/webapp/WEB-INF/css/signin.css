@@ -4,6 +4,27 @@
     margin-left: 400px;
     margin-top: 80px;
 }
+
+.form-login{
+    height: 400px;
+    width: 350px;
+    margin-left: 375px;
+    margin-top: 65px;
+    background-color: white;
+    border: #4476A7 inset 2px;
+    border-radius: 5px;
+}
+
+.form-register{
+    height: 600px;
+    width: 400px;
+    margin-left: 375px;
+    margin-top: 65px;
+    background-color: white;
+    border: #4476A7 inset 2px;
+    border-radius: 5px;
+}
+
 .imageDiv {
     display:inline-block;
     width:160px;
