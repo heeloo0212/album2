@@ -20,7 +20,7 @@
         <ul class="nav navbar-nav">
             <li class="nav-item active"><a href="${pageContext.request.contextPath}/toMain" ><span class="glyphicon glyphicon-home"></span> 相册</a></li>
             <li class="nav-item"><a href="${pageContext.request.contextPath}/toShowAllPhotos" ><span class="glyphicon glyphicon-picture"></span> 照片</a></li>
-            <li class="nav-item"><a href="#" ><span class="glyphicon glyphicon-facetime-video"></span> 视频</a></li>
+            <li class="nav-item"><a href="${pageContext.request.contextPath}/getVideo" ><span class="glyphicon glyphicon-facetime-video"></span> 视频</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="nav-item"><a href="${pageContext.request.contextPath}/getAllFriend"><span class="glyphicon glyphicon-user"></span> 好友列表</a></li>

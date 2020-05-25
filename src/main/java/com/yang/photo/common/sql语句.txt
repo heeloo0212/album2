@@ -101,3 +101,15 @@ create table message
   talk_room varchar(50),
   create_time datetime
 )ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+drop table if exists video;
+create table video
+(
+  id int primary key auto_increment,
+  name varchar(20),
+  user_id int,
+  video_address varchar(100),
+  info varchar(100),
+  click int,
+  create_time datetime
+)ENGINE=INNODB DEFAULT CHARSET=utf8;

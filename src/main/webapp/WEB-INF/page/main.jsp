@@ -138,7 +138,7 @@
 <body>
 <%@ include file="header.jsp" %>
 <div class="container">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upModal"><i class="glyphicon glyphicon-open"></i>上传相册/视频</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upModal"><i class="glyphicon glyphicon-open"></i>上传照片到相册</button>
     <button type="button" class="btn" data-toggle="modal" data-target="#createModal">创建相册</button>
     <button type="button" class="btn">展示设置</button>
     <br><br>
@@ -150,14 +150,11 @@
                     <a href="${pageContext.request.contextPath}/getPhotos?gid=${photoGraph.id}">
                     <img src="${pageContext.request.contextPath}/${photoGraph.image}" class="imageSize"></a>
                     <br><br>
-                    <label>${photoGraph.name}</label>
-                </div>
-                <div class="panel-footer right">
-                    <button onclick="showDeleteModal(${photoGraph.id})" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>
-                    <button onclick="showModifyModal(${photoGraph.id},'${photoGraph.name}','${photoGraph.description}','${photoGraph.type}','${photoGraph.permission}')" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i></button>
+                    <label style="width: 150px">${photoGraph.name}</label>
+                    <button onclick="showDeleteModal(${photoGraph.id})" class="btn btn-danger btn-sm pull-right"><i class="glyphicon glyphicon-trash"></i></button>
+                    <button onclick="showModifyModal(${photoGraph.id},'${photoGraph.name}','${photoGraph.description}','${photoGraph.type}','${photoGraph.permission}')" class="btn btn-primary btn-sm pull-right"><i class="glyphicon glyphicon-edit"></i></button>
                 </div>
             </div>
-
         </div>
         </c:forEach>
     </div>
@@ -186,7 +183,7 @@
             <div class="modal-body ">
                 <div id="Pic_pass">
                     <p style="font-size: 20px;font-weight: bold;">请上传照片 </p>
-                    <p><span style="color: red">注：每张照片大写不可超过4M，且最多可以传十张</span></p>
+                    <p><span style="color: red">注：按住ctrl可多选</span></p>
                     <div class="picDiv">
                         <div class="addImages">
                             <input type="file" class="file" id="fileInput" name="file" multiple="multiple" accept="image/png, image/jpeg, image/gif, image/jpg">
@@ -202,7 +199,7 @@
 
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" >
-                    上传照片/视频
+                    上传照片
                 </button>
             </div>
         </div><!-- /.modal-content -->
