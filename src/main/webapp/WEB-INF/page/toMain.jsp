@@ -11,8 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-<jsp:forward page="/toMain"></jsp:forward>
+<%--<jsp:forward page="/toMain"></jsp:forward>--%>
 
 </body>
 </html>
-</html>
+
