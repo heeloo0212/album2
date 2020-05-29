@@ -1,5 +1,6 @@
 package com.yang.photo.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.yang.photo.dao.ActiveDao;
 import com.yang.photo.dao.CommentDao;
 import com.yang.photo.dao.ShowPhotoDao;
@@ -28,7 +29,8 @@ public class ActiveServiceImpl implements ActiveService {
     @Autowired
     private CommentDao commentDao;
 
-    @Override public List<Active> getActiveList() {
+    @Override public List<Active> getActiveList(int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         List<Active> activeList = activeDao.getActiveList();
         ShowPhoto showPhoto = new ShowPhoto();
         Comment comment = new Comment();

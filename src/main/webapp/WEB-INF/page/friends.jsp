@@ -226,6 +226,7 @@
     </div>
 </div>
 </div>
+<%@ include file="foot.jsp" %>
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="addFriendModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

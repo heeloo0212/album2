@@ -1,5 +1,6 @@
 package com.yang.photo.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.yang.photo.common.Constans;
 import com.yang.photo.dao.CommentDao;
 import com.yang.photo.pojo.*;
@@ -28,12 +29,14 @@ public class ActiveController {
     private CommentDao commentDao;
 
     @RequestMapping("/toShowAllPhotos")
-    public String toShowAllPhotos(Model model, HttpSession session){
+    public String toShowAllPhotos(Model model, HttpSession session,int pageNum,int pageSize){
         User user = SessionCommon.getUserSession(session);
-        List<Active> activeList = activeService.getActiveList();
+        List<Active> activeList = activeService.getActiveList(pageNum,pageSize);
         if(activeList != null) {
+            PageInfo pageInfo = new PageInfo(activeList);
             model.addAttribute("activeList", activeList);
             model.addAttribute("user",user);
+            model.addAttribute("pageInfo",pageInfo);
         }
         return  "showAllPhotos";
     }

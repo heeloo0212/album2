@@ -159,7 +159,7 @@
         </c:forEach>
     </div>
 </div>
-
+<%@ include file="foot.jsp" %>
 <!-- 上传模态框（Modal） -->
 <div class="modal fade" id="upModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">

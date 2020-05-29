@@ -182,10 +182,18 @@
                 </li>
                 </c:forEach>
             </ul>
+            <br><br>
+            <div style="text-align: center">
+            <ul >
+                <a href="/toShowAllPhotos?pageNum=${pageInfo.prePage}&&pageSize=10">上一页</a>
+                <a href="/toShowAllPhotos?pageNum=${pageInfo.nextPage}&&pageSize=10">下一页</a>
+                总页数：${pageInfo.pages} 当前页：${pageInfo.pageNum}
+            </ul>
+            </div>
         </div>
     </div>
 </div>
-
+<%@ include file="foot.jsp" %>
 <!-- 确认删除 start -->
 <div class="modal fade" tabindex="-1" id="deleteActiveModal">
     <!-- 窗口声明 -->

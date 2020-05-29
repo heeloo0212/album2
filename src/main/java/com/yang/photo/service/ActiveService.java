@@ -6,7 +6,7 @@ import com.yang.photo.pojo.ShowPhoto;
 import java.util.List;
 
 public interface ActiveService {
-    List<Active> getActiveList();
+    List<Active> getActiveList(int pageNum,int pageSize);
     int addActive(Active active,List<ShowPhoto> showPhotoList);
     Active getActiveById(int id);
     int deletActive(int id);

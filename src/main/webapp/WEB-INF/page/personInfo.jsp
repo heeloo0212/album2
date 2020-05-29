@@ -188,6 +188,7 @@
         </div>
     </form>
 </div>
+<%@ include file="foot.jsp" %>
 </body>
 <script>
     $(document).ready(function() {

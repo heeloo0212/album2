@@ -91,7 +91,7 @@
         </ul>
     </div>
 </div>
-
+<%@ include file="foot.jsp" %>
 <!-- 确认删除 start -->
 <div class="modal fade" tabindex="-1" id="deletePhotoModal">
     <!-- 窗口声明 -->
