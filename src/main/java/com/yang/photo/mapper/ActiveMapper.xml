@@ -22,7 +22,7 @@
         select * from active
         <where>
             <if test="graphName != null and graphName != ''">graph_name = #{graphName}</if>
-            <if test="userName != null and userName != ''">and user_name = #{userName}</if>
+            <if test="userName != null and userName != ''">and user_name like concat('%',#{userName},'%')</if>
         </where>
         order by create_time desc
 
