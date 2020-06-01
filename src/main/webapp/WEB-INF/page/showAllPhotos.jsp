@@ -128,8 +128,15 @@
 </script>
 <body>
 <%@ include file="header.jsp" %>
+
 <div class="container">
     <div id="main">
+        <form class="form-inline" action="${pageContext.request.contextPath}/toShowAllPhotos?pageNum=1&&pageSize=10" method="post" id="frmSearch">
+            <div class="form-group">
+                <input type="text" class="form-control" id="userName" placeholder="请输入用户名" name="userName" value="">
+            </div>
+            <input type="submit" value="查询" class="btn btn-primary" id="doSearch">
+        </form>
         <div>
             <ul>
                 <c:forEach items="${activeList}" var="active">

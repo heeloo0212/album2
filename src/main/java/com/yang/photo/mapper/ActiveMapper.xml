@@ -17,9 +17,13 @@
         graph_id,graph_name,user_name,info,click,create_time
     </sql>
 
-    <select id="getActiveList" resultMap="activeResultMap">
+    <select id="getActiveList" resultMap="activeResultMap" parameterType="com.yang.photo.pojo.Active">
 
         select * from active
+        <where>
+            <if test="graphName != null and graphName != ''">graph_name = #{graphName}</if>
+            <if test="userName != null and userName != ''">and user_name = #{userName}</if>
+        </where>
         order by create_time desc
 
     </select>

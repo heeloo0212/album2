@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface ActiveDao {
-    List<Active> getActiveList();
+    List<Active> getActiveList(Active active);
     int addActive(Active active);
     Active getActiveById(int id);
     int deleteActive(int id);

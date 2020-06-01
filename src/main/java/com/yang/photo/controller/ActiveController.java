@@ -29,9 +29,13 @@ public class ActiveController {
     private CommentDao commentDao;
 
     @RequestMapping("/toShowAllPhotos")
-    public String toShowAllPhotos(Model model, HttpSession session,int pageNum,int pageSize){
+    public String toShowAllPhotos(Model model, HttpSession session,int pageNum,int pageSize,String userName){
         User user = SessionCommon.getUserSession(session);
-        List<Active> activeList = activeService.getActiveList(pageNum,pageSize);
+        Active active = new Active();
+        if(userName != null){
+            active.setUserName(userName);
+        }
+        List<Active> activeList = activeService.getActiveList(active,pageNum,pageSize);
         if(activeList != null) {
             PageInfo pageInfo = new PageInfo(activeList);
             model.addAttribute("activeList", activeList);

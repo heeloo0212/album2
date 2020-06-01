@@ -29,9 +29,9 @@ public class ActiveServiceImpl implements ActiveService {
     @Autowired
     private CommentDao commentDao;
 
-    @Override public List<Active> getActiveList(int pageNum,int pageSize) {
+    @Override public List<Active> getActiveList(Active active,int pageNum,int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Active> activeList = activeDao.getActiveList();
+        List<Active> activeList = activeDao.getActiveList(active);
         ShowPhoto showPhoto = new ShowPhoto();
         Comment comment = new Comment();
         for(Active a : activeList){
