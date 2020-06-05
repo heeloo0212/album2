@@ -92,7 +92,7 @@
                         skin:'successMsg'
                     },function(){
                         //重新加载数据
-                        location.href='${pageContext.request.contextPath}/toShowAllPhotos';
+                        location.href='${pageContext.request.contextPath}/toShowAllPhotos?pageNum=1&&pageSize=10';
                     })
                 }else{
                     layer.msg(result.message,{
